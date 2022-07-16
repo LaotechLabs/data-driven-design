@@ -174,8 +174,10 @@ export default {
 
 					// Custom Value Binding 
 					// Modified code ***
+
+					let customValues = ['Red', 'Yellow', 'Blue', 'Green'];
 					if (value == null || value == undefined) {
-						var changed = uiWidget.setDataBinding(variable, '200', this);
+						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
 						if (changed){
 							var state = uiWidget.getState();
 							if (state) {
