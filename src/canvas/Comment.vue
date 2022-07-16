@@ -7,6 +7,14 @@ import win from 'dojo/_base/win'
 import DomBuilder from 'common/DomBuilder'
 // import CheckBox from 'common/CheckBox'
 
+// Custom import
+import DataBinding from 'canvas/toolbar/components/DataBindingTree' 
+// import Toolbar from "canvas/toolbar/Toolbar"
+// import Widget from 'canvas/controller/Widget'
+// import _Render from 'canvas/toolbar/mixins/_Render'
+// import Dialog from 'common/Dialog'
+// import DataSection from 'canvas/toolbar/components/DataSection'
+
 export default {
     name: 'Comment',
     mixins:[],
@@ -83,6 +91,61 @@ export default {
 				var div = this.renderCommentIcon({x:0,y:0});
 				this._onAddNDropStart(div, {}, params.event, "onCommentAdded");
 			},
+		
+		
+			// ***********************************************************************************
+			// Custom Functions
+			// Start 
+
+
+
+			mapItems () {
+				let variableName = 1;
+				let sArr = [];
+				let wArr1 = [];
+				let wArr2 = [];
+
+				// Get screen names
+				for (const screen in this.model.screens) {
+					sArr.push(screen);
+				}
+				let screen1W = this.model.screens[sArr[0]].children;
+				let widgets = this.model.widgets;
+
+				// Get widget names for each screen
+				for (let widget in widgets) {
+					if (screen1W.includes(widget)) {
+						wArr1.push(widget);
+					}
+					else {
+						wArr2.push(widget);
+					}
+				}
+
+				// DataBind same variable of one widget each of both screens
+				for (let i = 0; i < wArr1.length; i++) {
+
+					this.customDataBinding(widgets[wArr1[i]], variableName);
+					this.customDataBinding(widgets[wArr2[i]], variableName);
+
+					variableName += 1;
+				}
+			},
+
+			customDataBinding(widget, value) {
+				let dataBinding = this.$new(DataBinding)
+				dataBinding.setModel(this.model)
+				dataBinding.setWidget(widget);
+				dataBinding.onCustomNewVariable(value.toString());
+				let newProps = {};
+				newProps['databinding'] = dataBinding.getValue();
+				this.controller.updateWidgetProperties(widget.id, newProps, "props");
+			},
+
+
+
+			// End
+			// ***********************************************************************************
 
 			async onCommentAdded (pos, model, e){
 				this.logger.log(2,"onCommentAdded", "enter");

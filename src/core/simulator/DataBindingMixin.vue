@@ -171,11 +171,26 @@ export default {
 				for (var key in databinding){
 					var variable = databinding[key];
 					var value = this.getDataBindingByPath(variable);
-					if (value !== null && value !== undefined){
-						// we need to add the key here as well to allow options or so...
-						var changed = uiWidget.setDataBinding(variable, value, this);
+
+					// Custom Value Binding 
+					// Modified code ***
+					if (value == null || value == undefined) {
+						var changed = uiWidget.setDataBinding(variable, '200', this);
 						if (changed){
 							var state = uiWidget.getState();
+							if (state) {
+								this.log("WidgetInit", screen.id, uiWidget.model.id, null, state);
+							}
+						}
+					}
+
+					// *** Till here 
+
+					else if (value !== null && value !== undefined){
+						// we need to add the key here as well to allow options or so...
+						changed = uiWidget.setDataBinding(variable, value, this);
+						if (changed){
+							state = uiWidget.getState();
 							if (state) {
 								this.log("WidgetInit", screen.id, uiWidget.model.id, null, state);
 							}

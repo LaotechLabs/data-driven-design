@@ -139,6 +139,14 @@ export default {
             this.onSelectVariable(true, v)
             this.onChange()
         },      
+        onCustomNewVariable (v) {
+            this.logger.log(-1, 'onNewVariable', 'enter', v)
+            if (this.variables.indexOf(v) < 0) {
+                this.variables.unshift(v)
+            }
+            this.onSelectVariable(true, v)
+            this.onChange()
+        },   
         onSelectVariable (selected, variable) {      
             this.logger.log(-1, 'onSelectVariable', 'enter', selected, variable)     
             if (selected) {

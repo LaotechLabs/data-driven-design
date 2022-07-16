@@ -21,7 +21,7 @@ import BoxSize from 'canvas/toolbar/components/BoxSize'
 import BoxBorder from 'canvas/toolbar/components/BoxBorder'
 import BoxBorder2 from 'canvas/toolbar/components/BoxBorder2'
 import BoxPadding from 'canvas/toolbar/components/BoxPadding'
-import CreateButton from 'canvas/toolbar/components/CreateButton'
+import CreateButton from 'canvas/toolbar/components/CreateButton' 
 import ActionButton from 'canvas/toolbar/components/ActionButton'
 import DataSection from 'canvas/toolbar/components/DataSection'
 import ScreenImportAdd from 'canvas/toolbar/components/ScreenImportAdd'
@@ -525,7 +525,6 @@ export default {
 
 
 		_renderGroupAction (){
-
 			var parent = this.createSection("Action");
 
 			var content = document.createElement("div");
@@ -809,7 +808,6 @@ export default {
 
 
 		_renderWidgetLine (){
-
 			var parent = this.createSection("Action");
 
 			var content = document.createElement("div");
@@ -1209,7 +1207,6 @@ export default {
 
 
 		_renderScreenActions (){
-
 			var parent = this.createSection("Actions");
 
 

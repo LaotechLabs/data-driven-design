@@ -1223,7 +1223,7 @@ export default {
 
 			var popup = this.db.div("MatcDataBindingDialogXXL MatcPadding").build();
 			var cntr = this.db.div("").build(popup);
-
+			
 			let dataBinding = this.$new(DataBinding)
 			dataBinding.setModel(this.model)
 			dataBinding.setWidget(widget)
@@ -1246,10 +1246,12 @@ export default {
 		},
 
 		setDataBinding (d, dataBindingWidget){
+
 			/**
 			 * Since 2.1.2 We get a dict form the dataBinding Widgt
 			 */
-			let value = dataBindingWidget.getValue()
+			let value = dataBindingWidget.getValue();
+			// console.log(value);
 
 			/**
 			 * FIXME: Since 2.1.5 we should add here some other call
@@ -1257,6 +1259,7 @@ export default {
 			this.emit("propertyChange", "databinding", value);
 			d.close();
 		},
+
 
 		/**********************************************************************
 		 * Table

@@ -213,7 +213,7 @@ export default {
 				*/
 				if (!widget.container){
 					this.createWidget(widget, screen, screenId, div);
-				}
+				}``
 			}
 
 			/**

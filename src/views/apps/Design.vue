@@ -131,6 +131,7 @@ export default {
 
       this.tempOwn(on(toolbar, "newLine", lang.hitch(canvas, "addLine")));
       this.tempOwn(on(toolbar, "newComment", lang.hitch(canvas, "addComment")));
+      this.tempOwn(on(toolbar, "mapItems", lang.hitch(canvas, "mapItems")));
 
       this.tempOwn(on(toolbar, "newTemplatedWidget", lang.hitch(canvas, "addTemplatedWidget")));
       this.tempOwn(on(toolbar, "newTemplatedScreen", lang.hitch(canvas, "addTemplatedScreen")));

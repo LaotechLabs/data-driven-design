@@ -66,6 +66,13 @@
 				</div>
 			</div>
 
+			<div class="" data-dojo-attach-point="commentSection">
+				<div class="MatcToolbarItem MatcMultiIcon" data-dojo-attach-point="mapBtn">
+					<span class="mdi mdi-database-arrow-right"></span>
+
+				</div>
+			</div>
+
 		</div>
 
 		<div class="MatcToolbarTop">
@@ -232,6 +239,7 @@ export default {
 			this.own(on(this.deleteBtn, touch.press, lang.hitch(this, "onDelete")));
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
+			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
 
 			this.own(on(this.editTool, touch.press, lang.hitch(this, "onEdit")));
 			this.own(on(this.moveTool, touch.press, lang.hitch(this, "onMove")));
@@ -869,15 +877,12 @@ export default {
 			this.stopEvent(e);
 
 			if(this._selectedWidget){
-
 				this.emit("newLine", {"type" : "line", "event" : e, "from" : this._selectedWidget.id});
 
 			} else if(this._selectedGroup){
-
 				this.emit("newLine", {"type" : "line", "event" : e, "from" : this._selectedGroup.id});
 
 			} else if(this._selectedScreen){
-
 				this.emit("newLine", {"type" : "line", "event" : e, "from" : this._selectedScreen.id});
 
 			}
@@ -912,6 +917,26 @@ export default {
 			this.emit("newComment", {"type" : "comment", "event" : e});
 		},
 
+		onMapItems (e){
+			this.stopEvent(e);
+
+			this.emit("mapItems");
+		},
+
+		setDataBinding (d, dataBindingWidget){
+
+			/**
+			 * Since 2.1.2 We get a dict form the dataBinding Widgt
+			 */
+			let value = dataBindingWidget.getValue()
+			console.log(value);
+
+			/**
+			 * FIXME: Since 2.1.5 we should add here some other call
+			 */
+			this.emit("propertyChange", "databinding", value);
+			d.close();
+		},
 
 
 		createOnClick (e){
@@ -1663,6 +1688,16 @@ export default {
 					newProps[key] = value;
 					this.controller.updateWidgetProperties(this._selectedWidget.id, newProps, "props");
 				}
+			}
+			return false;
+		},
+
+		setCustomWidgetProps (key, value, widget){
+			this.logger.log(2,"setWidgetProps", "entry > " + key + " - "+ value);
+			if(widget.props){
+				var newProps = {};
+				newProps[key] = value;
+				this.controller.updateWidgetProperties(widget.id, newProps, "props");
 			}
 			return false;
 		},
