@@ -166,19 +166,41 @@ export default {
 			
 		},
 
+		// initDataBinding (uiWidget, screen){
+		// 	var databinding = this.getDataBinding(uiWidget.model);
+		// 	if (databinding ){
+		// 		for (var key in databinding){
+		// 			var variable = databinding[key];
+		// 			var value = this.getDataBindingByPath(variable);
+		// 			if (value !== null && value !== undefined){
+		// 				// we need to add the key here as well to allow options or so...
+		// 				var changed = uiWidget.setDataBinding(variable, value, this);
+		// 				console.log('variable', variable);
+		// 				console.log('value', value);
+		// 				if (changed){
+		// 					var state = uiWidget.getState();
+		// 					if (state) {
+		// 						this.log("WidgetInit", screen.id, uiWidget.model.id, null, state);
+		// 					}
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// },
+
 		initDataBinding (uiWidget, screen){
 			var databinding = this.getDataBinding(uiWidget.model);
 			if (databinding ){
 				for (var key in databinding){
 					var variable = databinding[key];
 					var value = this.getDataBindingByPath(variable);
-					console.log(value);
+
 
 					// Custom Value Binding 
 					// Modified code ***
 
 					// let customValues = ['Red', 'Yellow', 'Blue', 'Green'];
-					let customValues = customData.d2;
+					let customValues = customData.d3;
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
 						if (changed){

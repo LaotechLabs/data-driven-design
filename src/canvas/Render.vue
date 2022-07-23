@@ -597,8 +597,8 @@ export default {
 						context.lineTo(w, h);
 						context.strokeStyle = this.model.grid.color;
 						context.stroke();
-						// let url = "url(" + c.toDataURL("image/png")  + ")";
-						let url = "https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
+						let url = "url(" + c.toDataURL("image/png")  + ")";
+						// let url = "https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
 						this.gridBackground[z] = url;
 					}
 					backgroundDiv.style.backgroundImage = this.gridBackground[z]
@@ -632,8 +632,8 @@ export default {
 								context.strokeStyle = this.model.grid.color;
 								context.stroke();
 							}
-							// this.gridBackground[z] = "url(" + c.toDataURL("image/png")  + ")";
-							this.gridBackground[z] = "https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
+							this.gridBackground[z] = "url(" + c.toDataURL("image/png")  + ")";
+							// this.gridBackground[z] = "https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
 						}
 						backgroundDiv.style.backgroundImage = this.gridBackground[z]
 						backgroundDiv.style.backgroundSize = w / z + 'px ' + h / z + 'px'

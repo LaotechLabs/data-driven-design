@@ -196,8 +196,8 @@ export default {
 				} else {
 					css.add(div, "MatcImageUploadPreviewVertical");
 				}
-				// div.style.backgroundImage = "url(/rest/images/" + data[i].url + "?token=" + this.jwtToken+ ")";
-				div.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";
+				div.style.backgroundImage = "url(/rest/images/" + data[i].url + "?token=" + this.jwtToken+ ")";
+				// div.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";
 
 				if(this.imageIsSelected(data[i])){
 					css.add(div, "MatcImageUploadPreviewSelected ");
@@ -209,7 +209,7 @@ export default {
 				this.tempOwn(on(del, touch.press, lang.hitch(this, "_deleteImage", data[i])));
 				div.appendChild(del);
 
-				data[i]["url"] = "https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
+				// data[i]["url"] = "https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
 				parent.appendChild(div);
 				this.tempOwn(on(div, touch.press, lang.hitch(this, "_selectImage", data[i], div)));
 			}
@@ -291,7 +291,6 @@ export default {
 
 		_selectImage (v, div, e){
 			this.stopEvent(e);
-			console.log(v);
 
 			if(this.multiSelection){
 	
@@ -306,7 +305,6 @@ export default {
 				}
 
 			} else {
-				console.log('3')
 				var i = {
 					name: v.name,
 					url : v.url,
