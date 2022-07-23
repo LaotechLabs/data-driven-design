@@ -900,7 +900,6 @@ export default {
 		},
 
 		_renderWidgetImage () {
-
 			var parent = this.createSection( "Image", true);
 
 			var content = document.createElement("div");
@@ -1187,7 +1186,6 @@ export default {
 
 
 		_renderScreenImage () {
-
 			var parent = this.createSection( "Image", true);
 
 			var content = document.createElement("div");

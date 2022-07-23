@@ -126,7 +126,7 @@ export default {
 				for (let i = 0; i < wArr1.length; i++) {
 
 					this.customDataBinding(widgets[wArr1[i]], variableName);
-					this.customDataBinding(widgets[wArr2[i]], variableName);
+					// this.customDataBinding(widgets[wArr2[i]], variableName);
 
 					variableName += 1;
 				}

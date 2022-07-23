@@ -5,6 +5,7 @@
 <script>
 
 import JSONPath from 'core/JSONPath'
+import customData from 'src/customData'
 
 export default {
 	name: 'DataBindingMixin',
@@ -171,11 +172,13 @@ export default {
 				for (var key in databinding){
 					var variable = databinding[key];
 					var value = this.getDataBindingByPath(variable);
+					console.log(value);
 
 					// Custom Value Binding 
 					// Modified code ***
 
-					let customValues = ['Red', 'Yellow', 'Blue', 'Green'];
+					// let customValues = ['Red', 'Yellow', 'Blue', 'Green'];
+					let customValues = customData.d2;
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
 						if (changed){
@@ -190,7 +193,7 @@ export default {
 
 					else if (value !== null && value !== undefined){
 						// we need to add the key here as well to allow options or so...
-						changed = uiWidget.setDataBinding(variable, value, this);
+						changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
 						if (changed){
 							state = uiWidget.getState();
 							if (state) {
