@@ -1501,12 +1501,10 @@ export default class RenderFactory extends Core {
 				css.add(parent, "MatcScreenImageVertical");
 			}
 			if (this.hash) {
-				console.log('10');
 				// parent.style.backgroundImage = "url("+img.url+")";
 				parent.style.backgroundImage = "url(/rest/images/" + this.hash + "/" + img.url + ")";
 				// parent.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";
 			} else if (this.jwtToken) {
-				console.log("20")
 				parent.style.backgroundImage = "url(/rest/images/" + img.url + "?token=" + this.jwtToken+ ")";
 				// parent.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";
 			} else {
@@ -1514,7 +1512,6 @@ export default class RenderFactory extends Core {
 					this.logger.warn('_set_backgroundImage', 'error > no token or hash')
 					this.logger.sendError(new Error('RenderFactgoryNoToken'))
 				}
-				console.log("30")
 				// parent.style.backgroundImage = "url("+img.url+")";
 				parent.style.backgroundImage = "url(/rest/images/" + img.url + ")";
 				// parent.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";

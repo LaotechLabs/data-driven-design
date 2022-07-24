@@ -113,6 +113,11 @@
 			
 						</div>
 
+						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="nextButton">
+							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
+							<span class="MatcToolbarLabel">Next</span>
+						</a>
+
 
 
 
@@ -929,7 +934,6 @@ export default {
 			 * Since 2.1.2 We get a dict form the dataBinding Widgt
 			 */
 			let value = dataBindingWidget.getValue()
-			console.log(value);
 
 			/**
 			 * FIXME: Since 2.1.5 we should add here some other call

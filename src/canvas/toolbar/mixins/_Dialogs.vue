@@ -837,10 +837,12 @@ export default {
 		/**********************************************************************
 		 * Simulation Stuff
 		 **********************************************************************/
+		startCustom () {
+			this.startSimilator(this.cusVar);
+			this.cusVar++;
+		},
 
-
-
-		startSimilator () {
+		startSimilator (count) {
 			this.logger.log(0,"startSimilator", "entry");
 			var pos = domGeom.position(win.body());
 			let maxHeight = pos.h - 100
@@ -854,27 +856,26 @@ export default {
 			if (this.model.type === "desktop"){
 				pos.w = pos.w * 0.75;
 				pos.h = pos.h * 0.75;
-				this._showDesktopSimulator(this.model, pos, maxHeight);
+				this._showDesktopSimulator(this.model, pos, maxHeight, count);
 			} else if(this.model.type === "tablet") {
 				if (this.model.screenSize.w > this.model.screenSize.h){
 					pos.w = pos.w * 0.65;
 					pos.h = pos.h * 0.65;
-					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight);
+					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count);
 				} else {
 					pos.w = pos.w * 0.35;
 					pos.h = pos.h * 0.35;
-					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight);
+					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count);
 				}
 			} else {
 				pos.w = pos.w * 0.25;
 				pos.h = pos.h * 0.25;
-				this._showMobileTest(this.model, pos , "MatchSimulatorWrapperMobile", maxHeight);
+				this._showMobileTest(this.model, pos , "MatchSimulatorWrapperMobile", maxHeight, count);
 			}
 		},
 
 
-		_showDesktopSimulator (model, pos, maxHeight){
-
+		_showDesktopSimulator (model, pos, maxHeight, count){
 			var dialog = document.createElement("div");
 			css.add(dialog, "MatchSimulatorDialog");
 
@@ -891,7 +892,7 @@ export default {
 			container.style.width = Math.round(pos.w) + "px";
 			container.style.height = Math.round(pos.h) + "px";
 
-			var s = this.$new(Simulator,{mode : "debug", logData : false});
+			var s = this.$new(Simulator,{mode : "debug", logData : false, count: count});
 			s.scrollListenTarget = "parent";
 			s.isDesktopTest = true
 			s.setHash(this.hash)
@@ -934,8 +935,7 @@ export default {
 
 
 
-		_showMobileTest (model, pos, clazz, maxHeight){
-
+		_showMobileTest (model, pos, clazz, maxHeight, count){
 			var dialog = document.createElement("div");
 			css.add(dialog, "MatchSimulatorDialog");
 
@@ -968,7 +968,7 @@ export default {
 			var scroller = this.$new(ScrollContainer,{canDestroy:true});
 			scroller.placeAt(container);
 
-			var s = this.$new(Simulator,{mode : "debug", logData : false});
+			var s = this.$new(Simulator,{mode : "debug", logData : false, count: count});
 			s.scrollListenTarget = "parent";
 			s.isDesktopTest = true
 			s.setScrollContainer(scroller);

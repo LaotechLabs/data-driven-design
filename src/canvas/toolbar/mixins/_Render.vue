@@ -55,6 +55,7 @@ export default {
     mixins:[_Tooltip, DojoWidget],
     data: function () {
         return {
+			cusVar: 1,
 			hasPadding : ["Button", "DateDropDown", "DropDown", "TypeAheadTextBox", "MobileDropDown", "Label", "TextBox", 'LockSlider',
 						"TextArea", "Password", "SegmentButton", "SegmentPicker", "ToggleButton", "Table", 'Tree', 'VerticalNavigation', 'Paging'],
 			hasData : ["ToggleButton", "DateDropDown", "SegmentButton", "SegmentPicker", "DropDown", "MobileDropDown", "TextBox", "TextArea", "Password",
@@ -192,6 +193,7 @@ export default {
 			* set model
 			*/
 			this.own(on(this.simulatorButton, touch.press, lang.hitch(this, "startSimilator")));
+			this.own(on(this.nextButton, touch.press, lang.hitch(this, "startCustom")));
 
 			/**
 			* Tools section
@@ -362,6 +364,7 @@ export default {
 
 			this.addTooltip(this.home, "Click here to exit");
 			this.addTooltip(this.simulatorButton, "Start Simulation (No data will be stored)");
+			this.addTooltip(this.nextButton, "Iterate through data");
 
 
 			this.addTooltip(this.addScreenSection, "Add / Import Screens (S)", "vommondToolTipLeft");
@@ -465,7 +468,7 @@ export default {
 		****************************************************************************************************/
 
 		_renderRuler () {
-
+			
 			var parent = this.createSection("Ruler");
 
 			var content = document.createElement("div");
@@ -1295,7 +1298,6 @@ export default {
 		},
 
 		_renderScreen (){
-
 			var parent = this.createSection( "Settings");
 
 			var content = document.createElement("div");

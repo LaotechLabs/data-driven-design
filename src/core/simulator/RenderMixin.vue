@@ -14,7 +14,7 @@ import win from 'dojo/win'
 export default {
 	name: 'RenderMixin',
     methods: {
-    	render (){
+    	render (count){
 			this.logger.log(2,"render","enter >" + this._scaleX + " > " + this._scaleY);
 
 			css.remove(this.domNode, "MatcSimulatorSplash MactMainGradient");
@@ -24,14 +24,14 @@ export default {
 				this.domNode.innerHTML="";
 				//this.log("SessionStart",start.id, null, null);
 				this.logSessionStart(start.id)
-				this.renderScreen(start,0);
+				this.renderScreen(start,0, count);
 			} else {
 				let start = this.getStartScreen();
 				if(start){
 					this.domNode.innerHTML="";
 					//this.log("SessionStart",start.id, null, null);
 					this.logSessionStart(start.id)
-					this.renderScreen(start,0);
+					this.renderScreen(start,0, count);
 				} else {
 					this.domNode.innerHTML = "No Start Screen!";
 				}
@@ -41,7 +41,7 @@ export default {
 		/**
 		* The default method to show a screen without any animation
 		*/
-		renderScreen (screen, line){
+		renderScreen (screen, line, count){
 			this.logger.log(-1,"renderScreen","enter > " + screen.id + " / " + screen.name);
 
 			this.setSystemVariable('screen', screen.name)
@@ -64,7 +64,7 @@ export default {
 				/**
 				* render screen and all widgets
 				*/
-				var div = this.createScreen(screen, false);
+				var div = this.createScreen(screen, false, count);
 
 				/**
 				* append to DOM without any animation..
@@ -167,7 +167,7 @@ export default {
 		* isOverLay: if the screen is an overlay
 		* line: The line that triggered the rendering. Might by null on start!
 		* **********************************************************/
-		createScreen (screen, isOverlay){
+		createScreen (screen, isOverlay, count){
 			this.logger.log(2,"createScreen","enter > " + screen.id + " > overlay : " + isOverlay);
 			/**
 			* Call live cycle methods
@@ -212,7 +212,7 @@ export default {
 				* we do not render contained widgets!
 				*/
 				if (!widget.container){
-					this.createWidget(widget, screen, screenId, div);
+					this.createWidget(widget, screen, screenId, div, count);
 				}``
 			}
 
@@ -387,7 +387,7 @@ export default {
 			}
 		},
 
-		createWidget (widget, screen, screenId, div){
+		createWidget (widget, screen, screenId, div, count){
 
 			/**
 			* Create the widget container and call render factory
@@ -414,7 +414,7 @@ export default {
 			*/
 			let uiWidget = this.renderFactory.getUIWidget(widget);
 			if (uiWidget){
-				this.initDataBinding(uiWidget, screen);
+				this.initDataBinding(uiWidget, screen, count);
 			}
 
 			/**

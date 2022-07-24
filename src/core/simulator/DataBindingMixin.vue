@@ -188,7 +188,8 @@ export default {
 		// 	}
 		// },
 
-		initDataBinding (uiWidget, screen){
+		initDataBinding (uiWidget, screen, count){
+			console.log(count);
 			var databinding = this.getDataBinding(uiWidget.model);
 			if (databinding ){
 				for (var key in databinding){
@@ -199,8 +200,8 @@ export default {
 					// Custom Value Binding 
 					// Modified code ***
 
-					// let customValues = ['Red', 'Yellow', 'Blue', 'Green'];
-					let customValues = customData.d3;
+					console.log(customData['d' + parseInt(count)]);
+					let customValues = customData['d' + parseInt(count)]
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
 						if (changed){

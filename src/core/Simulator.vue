@@ -116,7 +116,7 @@ import Gestures from 'core/Gestures'
 
 export default {
 	name: 'Simulator',
-	props: ['mode', 'app'],
+	props: ['mode', 'app', 'count'],
 	mixins:[
 		Layout, Gestures, RestMixin, LogMixin, RenderMixin, EventMixin,ScriptMixin,
 		ScrollMixin, AnimationMixin, MouseMixin, DataBindingMixin, TemplateMixin, DojoWidget
@@ -488,7 +488,7 @@ export default {
 
 			this.renderFactory.setScaleFactor(this._scaleX, this._scaleY);
 
-			this.render();
+			this.render(this.count);
 
 			if((!has("android") && !has("ios"))){
 				this.logger.log(0,"postCreate","Desktop detected -> log mouse!");
