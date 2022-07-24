@@ -200,7 +200,6 @@ export default {
 					// Custom Value Binding 
 					// Modified code ***
 
-					console.log(customData['d' + parseInt(count)]);
 					let customValues = customData['d' + parseInt(count)]
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);

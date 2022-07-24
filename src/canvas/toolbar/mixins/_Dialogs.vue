@@ -28,6 +28,8 @@ import AnimationComposer from 'canvas/toolbar/dialogs/AnimationComposer'
 import ExportDialog from 'canvas/toolbar/dialogs/ExportDialog'
 import CustomFonts from 'canvas/toolbar/dialogs/CustomFonts'
 
+import customData from '../../../customData';
+
 export default {
     name: '_Dialogs',
     mixins:[Plan, DojoWidget],
@@ -838,8 +840,15 @@ export default {
 		 * Simulation Stuff
 		 **********************************************************************/
 		startCustom () {
+			// Find length of our dataset
+			let len = Object.keys(customData).length;
+
 			this.startSimilator(this.cusVar);
 			this.cusVar++;
+
+			if (this.cusVar > len) {
+				this.cusVar = 1;
+			}
 		},
 
 		startSimilator (count) {
