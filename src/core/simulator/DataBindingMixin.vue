@@ -189,7 +189,6 @@ export default {
 		// },
 
 		initDataBinding (uiWidget, screen, count){
-			console.log(count);
 			var databinding = this.getDataBinding(uiWidget.model);
 			if (databinding ){
 				for (var key in databinding){

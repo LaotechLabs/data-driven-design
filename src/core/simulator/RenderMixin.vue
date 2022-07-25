@@ -11,6 +11,9 @@ import on from 'dojo/on'
 import domGeom from 'dojo/domGeom'
 import win from 'dojo/win'
 
+import domtoimage from 'src/util/dom-to-image';
+import { saveAs } from 'file-saver'
+
 export default {
 	name: 'RenderMixin',
     methods: {
@@ -65,6 +68,10 @@ export default {
 				* render screen and all widgets
 				*/
 				var div = this.createScreen(screen, false, count);
+				domtoimage.toBlob(div)
+				.then(data => saveAs(data, '1.png'));
+				// saveAs(blob, '1.png');
+				
 
 				/**
 				* append to DOM without any animation..
