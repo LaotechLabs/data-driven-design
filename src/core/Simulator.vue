@@ -116,7 +116,7 @@ import Gestures from 'core/Gestures'
 
 export default {
 	name: 'Simulator',
-	props: ['mode', 'app', 'count'],
+	props: ['mode', 'app', 'count', 'download'],
 	mixins:[
 		Layout, Gestures, RestMixin, LogMixin, RenderMixin, EventMixin,ScriptMixin,
 		ScrollMixin, AnimationMixin, MouseMixin, DataBindingMixin, TemplateMixin, DojoWidget
@@ -363,7 +363,7 @@ export default {
 					}, t);
 					this.fullSreenListener = on(this.startNode, "click", lang.hitch(this, "onStartClick", model));
 				} else {
-					this.startSimilator(model);
+					this.startSimilator(model, this.download);
 				}
 			}
 		},
@@ -459,14 +459,15 @@ export default {
 				 * so we have to wait a little!
 				 */
 				setTimeout(() => {
-					this.startSimilator(model);
+					this.startSimilator(model, this.download);
 				}, 200)
 			} else {
-				this.startSimilator(model);
+				this.startSimilator(model, this.download);
 			}
 		},
 
-		async startSimilator (model){
+		async startSimilator (model, download){
+			console.log(download);
 			this.logger.log(2,"startSimilator","enter >" + model.id);
 
 			this.initScale();
@@ -488,7 +489,7 @@ export default {
 
 			this.renderFactory.setScaleFactor(this._scaleX, this._scaleY);
 
-			this.render(this.count);
+			this.render(this.count, this.download);
 
 			if((!has("android") && !has("ios"))){
 				this.logger.log(0,"postCreate","Desktop detected -> log mouse!");

@@ -12,12 +12,13 @@ import domGeom from 'dojo/domGeom'
 import win from 'dojo/win'
 
 import domtoimage from 'src/util/dom-to-image';
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
+import RenderFactory from 'core/RenderFactory';
 
 export default {
 	name: 'RenderMixin',
     methods: {
-    	render (count){
+    	render (count, download){
 			this.logger.log(2,"render","enter >" + this._scaleX + " > " + this._scaleY);
 
 			css.remove(this.domNode, "MatcSimulatorSplash MactMainGradient");
@@ -27,14 +28,14 @@ export default {
 				this.domNode.innerHTML="";
 				//this.log("SessionStart",start.id, null, null);
 				this.logSessionStart(start.id)
-				this.renderScreen(start,0, count);
+				this.renderScreen(start,0, count, download);
 			} else {
 				let start = this.getStartScreen();
 				if(start){
 					this.domNode.innerHTML="";
 					//this.log("SessionStart",start.id, null, null);
 					this.logSessionStart(start.id)
-					this.renderScreen(start,0, count);
+					this.renderScreen(start,0, count, download);
 				} else {
 					this.domNode.innerHTML = "No Start Screen!";
 				}
@@ -44,7 +45,18 @@ export default {
 		/**
 		* The default method to show a screen without any animation
 		*/
-		renderScreen (screen, line, count){
+
+		customRenderScreen(screen) {
+			this.renderFactory = new RenderFactory();
+			for (let i = 1; i < 4; i++) {
+			let cusDiv = this.createScreen(screen, false, i);
+				domtoimage
+					.toBlob(cusDiv)
+					.then(data => saveAs(data, i + '.png'));
+			}
+		},
+
+		renderScreen (screen, line, count, download){
 			this.logger.log(-1,"renderScreen","enter > " + screen.id + " / " + screen.name);
 
 			this.setSystemVariable('screen', screen.name)
@@ -67,12 +79,20 @@ export default {
 				/**
 				* render screen and all widgets
 				*/
-				var div = this.createScreen(screen, false, count);
-				domtoimage.toBlob(div)
-				.then(data => saveAs(data, '1.png'));
-				// saveAs(blob, '1.png');
-				
 
+				// for (let i = 0; i < 3; i++) {
+				// 	let cusDiv = this.createScreen(screen, false, i);
+				// 	domtoimage
+				// 		.toBlob(cusDiv)
+				// 		.then(data => saveAs(data, i + '.png'));
+				// }
+
+				var div = this.createScreen(screen, false, count);
+				if (download === 'yes') {
+					domtoimage
+					.toBlob(div)
+					.then(data => saveAs(data, count + '.png'));
+				}
 				/**
 				* append to DOM without any animation..
 				*/

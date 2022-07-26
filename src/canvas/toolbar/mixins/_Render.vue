@@ -194,6 +194,7 @@ export default {
 			*/
 			this.own(on(this.simulatorButton, touch.press, lang.hitch(this, "startSimilator")));
 			this.own(on(this.nextButton, touch.press, lang.hitch(this, "startCustom")));
+			this.own(on(this.exportButton, touch.press, lang.hitch(this, "exportCustom")));
 
 			/**
 			* Tools section

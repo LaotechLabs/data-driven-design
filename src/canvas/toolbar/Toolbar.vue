@@ -118,6 +118,11 @@
 							<span class="MatcToolbarLabel">Apply</span>
 						</a>
 
+						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="exportButton">
+							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
+							<span class="MatcToolbarLabel">Export</span>
+						</a>
+
 
 
 
