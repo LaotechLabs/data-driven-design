@@ -847,8 +847,10 @@ export default {
 			// for (const screen in screens) {
 			// 	console.log(screens[screen]);
 			// }
+			let download = 'yes';
+			let dialogCloseAuto = 'yes';
 			for (let i = 1; i < 4; i++) {
-				this.startSimilator(i, 'yes');
+				this.startSimilator(i, download, dialogCloseAuto);
 				setTimeout(this.stopSimulator, 3000);
 			}
 		},
@@ -857,7 +859,9 @@ export default {
 			// Find length of our dataset
 			let len = Object.keys(customData).length;
 
-			this.startSimilator(this.cusVar, 'no');
+			let download = 'no';
+			let dialogCloseAuto = 'no';
+			this.startSimilator(this.cusVar, download, dialogCloseAuto);
 			this.cusVar++;
 
 			if (this.cusVar > len) {
@@ -865,7 +869,7 @@ export default {
 			}
 		},
 
-		startSimilator (count, download) {
+		startSimilator (count, download, dialogCloseAuto) {
 			this.logger.log(0,"startSimilator", "entry");
 			var pos = domGeom.position(win.body());
 			let maxHeight = pos.h - 100
@@ -879,26 +883,26 @@ export default {
 			if (this.model.type === "desktop"){
 				pos.w = pos.w * 0.75;
 				pos.h = pos.h * 0.75;
-				this._showDesktopSimulator(this.model, pos, maxHeight, count, download);
+				this._showDesktopSimulator(this.model, pos, maxHeight, count, download, dialogCloseAuto);
 			} else if(this.model.type === "tablet") {
 				if (this.model.screenSize.w > this.model.screenSize.h){
 					pos.w = pos.w * 0.65;
 					pos.h = pos.h * 0.65;
-					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download);
+					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download, dialogCloseAuto);
 				} else {
 					pos.w = pos.w * 0.35;
 					pos.h = pos.h * 0.35;
-					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download);
+					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download, dialogCloseAuto);
 				}
 			} else {
 				pos.w = pos.w * 0.25;
 				pos.h = pos.h * 0.25;
-				this._showMobileTest(this.model, pos , "MatchSimulatorWrapperMobile", maxHeight, count, download);
+				this._showMobileTest(this.model, pos , "MatchSimulatorWrapperMobile", maxHeight, count, download, dialogCloseAuto);
 			}
 		},
 
 
-		_showDesktopSimulator (model, pos, maxHeight, count, download){
+		_showDesktopSimulator (model, pos, maxHeight, count, download, dialogCloseAuto){
 			var dialog = document.createElement("div");
 			css.add(dialog, "MatchSimulatorDialog");
 
@@ -954,11 +958,18 @@ export default {
 			this.canvas.enableMouseZoom(false);
 			this.canvas.setState("simulate");
 
+			if (dialogCloseAuto === 'yes') {
+				setTimeout(() => {
+					this.stopSimulator(s, scroller);
+					d.close();
+				}, 4000);
+			}
+
 		},
 
 
 
-		_showMobileTest (model, pos, clazz, maxHeight, count, download){
+		_showMobileTest (model, pos, clazz, maxHeight, count, download, dialogCloseAuto){
 			var dialog = document.createElement("div");
 			css.add(dialog, "MatchSimulatorDialog");
 
@@ -1044,6 +1055,13 @@ export default {
 			 */
 			this.canvas.enableMouseZoom(false);
 			this.canvas.setState("simulate");
+
+			if (dialogCloseAuto === 'yes') {
+				setTimeout(() => {
+					this.stopSimulator(s, scroller);
+					d.close();
+				}, 4000);
+			}
 
 		},
 

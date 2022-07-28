@@ -130,8 +130,6 @@
      * @return {Promise} - A promise that is fulfilled with a PNG image blob
      * */
     function toBlob(node, options) {
-        console.log('node', node);
-        console.log('options', options);
         return draw(node, options || {})
             .then(util.canvasToBlob);
     }
