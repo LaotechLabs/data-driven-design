@@ -962,7 +962,7 @@ export default {
 				setTimeout(() => {
 					this.stopSimulator(s, scroller);
 					d.close();
-				}, 4000);
+				}, count * 1000);
 			}
 
 		},
@@ -1060,7 +1060,7 @@ export default {
 				setTimeout(() => {
 					this.stopSimulator(s, scroller);
 					d.close();
-				}, 4000);
+				}, count * 1000);
 			}
 
 		},
