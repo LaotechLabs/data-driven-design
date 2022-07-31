@@ -467,7 +467,6 @@ export default {
 		},
 
 		async startSimilator (model, download){
-			console.log(download);
 			this.logger.log(2,"startSimilator","enter >" + model.id);
 
 			this.initScale();

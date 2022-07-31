@@ -852,7 +852,7 @@ export default {
 				let result = []
 				const headers = lines[0].split(',');
 				headers[headers.length - 1] = headers[headers.length - 1].slice(0, -1);
-
+			
 				lines.map(l => {
 					const obj = {}
 					const line = l.split(',')

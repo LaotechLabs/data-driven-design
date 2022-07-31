@@ -5,7 +5,7 @@
 <script>
 
 import JSONPath from 'core/JSONPath'
-import customData from 'src/customData'
+// import customData from 'src/customData'
 import {newCustomData} from 'src/newCustomData';
 
 
@@ -201,7 +201,8 @@ export default {
 					// Custom Value Binding 
 					// Modified code ***
 
-					let customValues = customData['d' + parseInt(count)];
+					// let customValues = customData['d' + parseInt(count)];
+					let customValues = newCustomData[parseInt(count) - 1];
 
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
