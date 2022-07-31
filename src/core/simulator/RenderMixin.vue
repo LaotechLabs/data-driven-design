@@ -91,7 +91,9 @@ export default {
 				if (download === 'yes') {
 					domtoimage
 					.toBlob(div)
-					.then(data => saveAs(data, count + '.png'));
+					.then(data => {
+						saveAs(data, count + '.png')
+						});
 				}
 				/**
 				* append to DOM without any animation..
