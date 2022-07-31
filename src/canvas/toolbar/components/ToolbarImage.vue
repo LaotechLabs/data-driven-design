@@ -197,6 +197,7 @@ export default {
 					css.add(div, "MatcImageUploadPreviewVertical");
 				}
 				div.style.backgroundImage = "url(/rest/images/" + data[i].url + "?token=" + this.jwtToken+ ")";
+				console.log(this.jwtToken);
 				// div.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";
 
 				if(this.imageIsSelected(data[i])){

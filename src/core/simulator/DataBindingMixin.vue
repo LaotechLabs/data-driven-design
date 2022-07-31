@@ -6,6 +6,8 @@
 
 import JSONPath from 'core/JSONPath'
 import customData from 'src/customData'
+import {newCustomData} from 'src/newCustomData';
+
 
 export default {
 	name: 'DataBindingMixin',
@@ -199,7 +201,8 @@ export default {
 					// Custom Value Binding 
 					// Modified code ***
 
-					let customValues = customData['d' + parseInt(count)]
+					let customValues = customData['d' + parseInt(count)];
+
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
 						if (changed){

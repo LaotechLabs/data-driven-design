@@ -123,6 +123,11 @@
 							<span class="MatcToolbarLabel">Export</span>
 						</a>
 
+						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="uploadButton">
+							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
+							<span class="MatcToolbarLabel">Upload</span>
+						</a>
+
 
 
 
