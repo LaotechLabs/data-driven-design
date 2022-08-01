@@ -203,6 +203,7 @@ export default {
 
 					// let customValues = customData['d' + parseInt(count)];
 					let customValues = newCustomData[parseInt(count) - 1];
+					console.log(customValues);
 
 					if (value == null || value == undefined) {
 						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
