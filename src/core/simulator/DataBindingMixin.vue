@@ -202,11 +202,12 @@ export default {
 					// Modified code ***
 
 					// let customValues = customData['d' + parseInt(count)];
-					let customValues = newCustomData[parseInt(count) - 1];
-					console.log(customValues);
+					// let customValues = newCustomData[parseInt(count) - 1];
+					let customValueArray = newCustomData[parseInt(count) - 1];
+					let customValue = customValueArray[variable];
 
 					if (value == null || value == undefined) {
-						var changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
+						var changed = uiWidget.setDataBinding(variable, customValue, this);
 						if (changed){
 							var state = uiWidget.getState();
 							if (state) {
@@ -219,7 +220,7 @@ export default {
 
 					else if (value !== null && value !== undefined){
 						// we need to add the key here as well to allow options or so...
-						changed = uiWidget.setDataBinding(variable, customValues[[parseInt(variable) - 1]], this);
+						changed = uiWidget.setDataBinding(variable, customValue, this);
 						if (changed){
 							state = uiWidget.getState();
 							if (state) {
