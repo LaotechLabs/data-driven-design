@@ -62,6 +62,11 @@ export default {
           screenSize: { w: 1024, h: 768 },
           factor: 2
         },
+        "Facebook Cover (Horizontal)": {
+          type: "tablet",
+          screenSize: { w: 615, h: 234 },
+          factor: 2
+        },
         Desktop: { type: "desktop", screenSize: { w: 1280, h: 720 } }
       }
     };
