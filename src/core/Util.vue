@@ -792,8 +792,105 @@ export default {
       };
     },
 
-    createEmptyScreen: function(x, y, name) {
-      return {
+    createEmptyScreen: function(x, y, name, rotate, type) {
+      if (rotate) {
+        return {
+        x: x,
+        y: y,
+        h: this.model.screenSize.w,
+        w: this.model.screenSize.h,
+        name: name,
+        type: "Screen",
+        style: {
+          background: "#ffffff"
+        },
+        min: {
+          w: this.model.screenSize.w,
+          h: this.model.screenSize.h
+        },
+        has: {
+          image: true
+        },
+        props: {
+          start: false
+        },
+        children: []
+      };
+      }
+      else if (type == 'fb') {
+        return {
+        x: x,
+        y: y,
+        h: 234,
+        w: 615,
+        name: name,
+        type: "Screen",
+        style: {
+          background: "#ffffff"
+        },
+        min: {
+          w: this.model.screenSize.w,
+          h: this.model.screenSize.h
+        },
+        has: {
+          image: true
+        },
+        props: {
+          start: false
+        },
+        children: []
+      };
+      }
+      else if (type == 'yt') {
+        return {
+        x: x,
+        y: y,
+        h: 1080,
+        w: 1920,
+        name: name,
+        type: "Screen",
+        style: {
+          background: "#ffffff"
+        },
+        min: {
+          w: this.model.screenSize.w,
+          h: this.model.screenSize.h
+        },
+        has: {
+          image: true
+        },
+        props: {
+          start: false
+        },
+        children: []
+      };
+      }
+      else if (type == 'ig') {
+        return {
+        x: x,
+        y: y,
+        h: 810,
+        w: 810,
+        name: name,
+        type: "Screen",
+        style: {
+          background: "#ffffff"
+        },
+        min: {
+          w: this.model.screenSize.w,
+          h: this.model.screenSize.h
+        },
+        has: {
+          image: true
+        },
+        props: {
+          start: false
+        },
+        children: []
+      };
+      }
+      else {
+        return {
         x: x,
         y: y,
         h: this.model.screenSize.h,
@@ -815,6 +912,7 @@ export default {
         },
         children: []
       };
+      }
     },
 
     getAppTypeIcon: function(model) {

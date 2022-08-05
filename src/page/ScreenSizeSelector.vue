@@ -62,9 +62,19 @@ export default {
           screenSize: { w: 1024, h: 768 },
           factor: 2
         },
-        "Facebook Cover (Horizontal)": {
+        "Facebook Cover": {
           type: "tablet",
           screenSize: { w: 615, h: 234 },
+          factor: 2
+        },
+        "Youtube Banner": {
+          type: "tablet",
+          screenSize: { w: 1920, h: 1080 },
+          factor: 2
+        },
+        "Instagram Post (Square)": {
+          type: "tablet",
+          screenSize: { w: 810, h: 810 },
           factor: 2
         },
         Desktop: { type: "desktop", screenSize: { w: 1280, h: 720 } }

@@ -97,7 +97,27 @@ export default {
 				var add = db.div("MatcUploader").build(this.addCntr);
 				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(add);
 				db.div("MatcHint MatcMarginTop", "Create Empty Screen").build(this.addCntr);
-				this.own(on(add, touch.press, lang.hitch(this, "onAddScreen")));
+				this.own(on(add, touch.press, lang.hitch(this, "onAddScreen", false, 'none')));
+
+				var addRotate = db.div("MatcUploader").build(this.addCntr);
+				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
+				db.div("MatcHint MatcMarginTop", "Create Rotated Screen").build(this.addCntr);
+				this.own(on(addRotate, touch.press, lang.hitch(this, "onAddScreen", true, 'rotate')));
+
+				var addFB = db.div("MatcUploader").build(this.addCntr);
+				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
+				db.div("MatcHint MatcMarginTop", "Create Facebook Cover").build(this.addCntr);
+				this.own(on(addFB, touch.press, lang.hitch(this, "onAddScreen", false, 'fb')));
+
+				var addYT = db.div("MatcUploader").build(this.addCntr);
+				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
+				db.div("MatcHint MatcMarginTop", "Create Youtube Banner").build(this.addCntr);
+				this.own(on(addYT, touch.press, lang.hitch(this, "onAddScreen", false, 'yt')));
+
+				var addIG = db.div("MatcUploader").build(this.addCntr);
+				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
+				db.div("MatcHint MatcMarginTop", "Create Instagram Post").build(this.addCntr);
+				this.own(on(addIG, touch.press, lang.hitch(this, "onAddScreen", false, 'ig')));
 
 				var upload = db.div("MatcUploader").build(this.uploadCntr);
 				db.div("MatcUploaderIcon MatcMiddle mdi mdi-cloud-upload").build(upload);
@@ -113,12 +133,13 @@ export default {
 			},
 
 
-			onAddScreen (e){
+			onAddScreen (rotate, type, e){
 				this.stopEvent(e);
-				var screen = this.createEmptyScreen(0,0,"Screen");
+				var screen = this.createEmptyScreen(0,0,"Screen", rotate, type);
+				console.log(screen);
 				screen._type = "Screen";
 				this.hideDropDown();
-				this.emit("onAdd", screen,e);
+				this.emit("onAdd", screen, e);
 			},
 
 
