@@ -113,19 +113,32 @@
 			
 						</div>
 
-						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="nextButton">
-							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
-							<span class="MatcToolbarLabel">Apply</span>
+						<a class="" data-dojo-attach-point="nextButton">
+							<!-- <span class="MatcToolbarLabel">Apply</span> -->
 						</a>
 
-						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="exportButton">
-							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
-							<span class="MatcToolbarLabel">Export</span>
+						<a class="" data-dojo-attach-point="exportButton">
+							<!-- <span class="MatcToolbarLabel">Export</span> -->
 						</a>
 
 						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="uploadButton">
 							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
 							<span class="MatcToolbarLabel">Upload</span>
+						</a>
+
+						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="addButton">
+							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
+							<span class="MatcToolbarLabel">Add</span>
+						</a>
+
+						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="iteratePreviousButton">
+							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
+							<span class="MatcToolbarLabel">⪻</span>
+						</a>
+
+						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="iterateNextButton">
+							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
+							<span class="MatcToolbarLabel">⪼</span>
 						</a>
 
 

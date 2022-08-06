@@ -392,6 +392,10 @@ export default {
 			return this.settings;
 		},
 
+		customSetting (widget, value, isImage) {
+			this.customInline(widget, value, isImage);
+		},
+
 		mergeSettings (s) {
 			if(s.canvasTheme){
 				this.settings.canvasTheme = s.canvasTheme;

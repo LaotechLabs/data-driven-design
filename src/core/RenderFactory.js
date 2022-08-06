@@ -345,6 +345,25 @@ export default class RenderFactory extends Core {
 		}
 	}
 
+	updateLabelCustom (widget, value) {
+		// var uiWidget = this.getUIWidgetByID(widget.id);
+		// if (!uiWidget) {
+		// 	let node = this._labelNodes[widget.id]
+		// 	if (node) {
+		// 		this.setInnerHTML(node, value)
+		// 	}
+		// }
+		let node = this.getLabelNodeById(widget);
+		if (node) {
+			this.setInnerHTML(node, value)
+		}
+	}
+
+	updateImageCustom (widget, value) {
+		let imgCntr = this._imageNodes[widget]
+		this._set_customBackgroundImage(imgCntr, value)
+	}
+
 	updateWidget(widget) {
 		console.debug('updateWidget', widget)
 		let parent = this._widgetNodes[widget.id];
@@ -1479,6 +1498,18 @@ export default class RenderFactory extends Core {
 	/**
 	 * background image
 	 */
+	_set_customBackgroundImage(parent, value) {
+		parent.style.backgroundImage = `url(${value})`
+		if (parent.style.backgroundSize) {
+			parent.style.backgroundSize = parent.style.backgroundSize + "%";
+		} else {
+			parent.style.backgroundSize = "100%"; // 100%
+		}
+		
+		parent.style.backgroundRepeat = "no-repeat";
+		parent.style.border = "none";
+	}
+
 	_set_backgroundImage(parent, style, model) {
 		let node = this._borderNodes[model.id];
 		if (node) {
@@ -1557,6 +1588,7 @@ export default class RenderFactory extends Core {
 				context.imageSmoothingEnabled = false;
 				context.stroke();
 				parent.style.backgroundImage = "url(" + c.toDataURL("image/png") + ")";
+				// parent.style.backgroundImage = "url(https://images.unsplash.com/photo-1657501156939-0e52be3f6987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)";
 				parent.style.border = "1px solid #777";
 			}
 

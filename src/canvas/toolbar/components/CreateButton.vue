@@ -979,6 +979,9 @@ export default {
 		},
 
 		onCreate (child,e){
+			console.log(this.model);
+			// child.props = {label: 'value'};
+			console.log(child);
 			this.stopEvent(e);
 			var value = lang.clone(child);
 			if(child.category){

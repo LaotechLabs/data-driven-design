@@ -29,7 +29,8 @@ import ExportDialog from 'canvas/toolbar/dialogs/ExportDialog'
 import CustomFonts from 'canvas/toolbar/dialogs/CustomFonts'
 
 import customData from '../../../customData';
-import {addNewData} from 'src/newCustomData';
+import { newCustomData } from 'src/newCustomData';
+import { addNewData } from 'src/newCustomData';
 // import RenderMixin from 'core/simulator/RenderMixin';
 
 
@@ -842,6 +843,45 @@ export default {
 		/**********************************************************************
 		 * Simulation Stuff
 		 **********************************************************************/
+		addCustom(isIterate, isPrev) {
+			if (!isIterate) {
+				this.iterateCount = 0;
+			}
+
+			let len = newCustomData.length - 1;
+
+			if (isPrev) {
+				if (this.iterateCount == 0) {
+					this.iterateCount = len - 1;
+				} else {
+					this.iterateCount = this.iterateCount - 1;
+				}
+			}
+
+			if (!isPrev) {
+				if (this.iterateCount == len - 1) {
+					this.iterateCount = 0;
+				} 
+				else {
+					this.iterateCount++;
+				}
+			}
+
+
+			let widgets = this.model.widgets;
+			let widgetNames = Object.keys(widgets);
+
+			for (let i = 0; i < widgetNames.length; i++) {
+				if (widgets[widgetNames[i]].type == 'Image') {
+					this.canvas.customSetting(widgetNames[i], newCustomData[this.iterateCount][widgets[widgetNames[i]].name], true);
+				}
+				else {
+					this.canvas.customSetting(widgetNames[i], newCustomData[this.iterateCount][widgets[widgetNames[i]].name], false);
+				}
+			}
+
+		},
+
 		onCustomFileUpload: function (e) {
 			const file = e.target.files[0];
 			const reader = new FileReader();
@@ -852,7 +892,7 @@ export default {
 				let result = []
 				const headers = lines[0].split(',');
 				headers[headers.length - 1] = headers[headers.length - 1].slice(0, -1);
-			
+
 				lines.map(l => {
 					const obj = {}
 					const line = l.split(',')

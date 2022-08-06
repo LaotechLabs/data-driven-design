@@ -12,7 +12,17 @@ export default {
     },
     components: {},
     methods: {
-      inlineEditInit (widget, resizeToWidth = false){
+			
+			customInline (widget, value, isImage) {
+				if (isImage) {
+					this.renderFactory.updateImageCustom(widget, value);
+				}
+				else {
+					this.renderFactory.updateLabelCustom(widget, value);
+				}
+			},
+
+      		inlineEditInit (widget, resizeToWidth = false){
 				this.logger.log(-1,"inlineEditInit", "enter", resizeToWidth);
 				this.cleanUpInlineEdit();
 

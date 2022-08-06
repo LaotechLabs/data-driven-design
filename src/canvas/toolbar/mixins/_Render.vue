@@ -55,6 +55,7 @@ export default {
     mixins:[_Tooltip, DojoWidget],
     data: function () {
         return {
+			iterateCount: 0,
 			cusVar: 1,
 			hasPadding : ["Button", "DateDropDown", "DropDown", "TypeAheadTextBox", "MobileDropDown", "Label", "TextBox", 'LockSlider',
 						"TextArea", "Password", "SegmentButton", "SegmentPicker", "ToggleButton", "Table", 'Tree', 'VerticalNavigation', 'Paging'],
@@ -196,6 +197,9 @@ export default {
 			this.own(on(this.nextButton, touch.press, lang.hitch(this, "startCustom")));
 			this.own(on(this.exportButton, touch.press, lang.hitch(this, "exportCustom")));
 			this.own(on(this.uploadButton, touch.press, lang.hitch(this, "uploadCustom")));
+			this.own(on(this.addButton, touch.press, lang.hitch(this, "addCustom", false, false)));
+			this.own(on(this.iteratePreviousButton, touch.press, lang.hitch(this, "addCustom", true, true)));
+			this.own(on(this.iterateNextButton, touch.press, lang.hitch(this, "addCustom", true, false)));
 
 			/**
 			* Tools section
