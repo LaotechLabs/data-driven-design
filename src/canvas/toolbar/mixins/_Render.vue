@@ -200,6 +200,7 @@ export default {
 			this.own(on(this.addButton, touch.press, lang.hitch(this, "addCustom", false, false)));
 			this.own(on(this.iteratePreviousButton, touch.press, lang.hitch(this, "addCustom", true, true)));
 			this.own(on(this.iterateNextButton, touch.press, lang.hitch(this, "addCustom", true, false)));
+			this.own(on(this.downloadButton, touch.press, lang.hitch(this, "downloadCustom", true, false)));
 
 			/**
 			* Tools section

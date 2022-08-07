@@ -360,7 +360,7 @@ export default class RenderFactory extends Core {
 	}
 
 	updateImageCustom (widget, value) {
-		let imgCntr = this._imageNodes[widget]
+		let imgCntr = this._imageNodes[widget];
 		this._set_customBackgroundImage(imgCntr, value)
 	}
 
@@ -875,6 +875,7 @@ export default class RenderFactory extends Core {
 		 * Since 3.0.41 we add another div so we can rotate
 		 */
 		let imgCntr =  document.createElement("div")
+		// this._set_customBackgroundImage(imgCntr, "https://cdn-1.motorsport.com/images/amp/2jXLAyN6/s1000/lewis-hamilton-mercedes-w13-1.jpg")
 		css.add(imgCntr, 'MatchWidgetTypeImageCntr')
 		parent.appendChild(imgCntr)
 		this._imageNodes[model.id] = imgCntr

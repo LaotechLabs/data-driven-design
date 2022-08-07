@@ -481,6 +481,15 @@
                 request.ontimeout = timeout;
                 request.responseType = 'blob';
                 request.timeout = TIMEOUT;
+                
+                // If custom url, remove the /rest/images/ part from the url
+
+                if (url.slice(0, 13) == '/rest/images/') {
+                    url = url.substring(13);
+                }
+
+                // Pass sliced url into request
+
                 request.open('GET', url, true);
                 request.send();
 

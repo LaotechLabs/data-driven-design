@@ -92,6 +92,7 @@ export default {
 					s.placeAt(wrapper);
 					s.setJwtToken(this.jwtToken);
 					s.setModel(model, screen.id);
+					console.log(model);
 
 					domtoimage.toBlob(s.domNode)
 							.then(lang.hitch(this, "onBlobReady", screen))

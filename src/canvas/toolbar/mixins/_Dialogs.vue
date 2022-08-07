@@ -31,7 +31,6 @@ import CustomFonts from 'canvas/toolbar/dialogs/CustomFonts'
 import customData from '../../../customData';
 import { newCustomData } from 'src/newCustomData';
 import { addNewData } from 'src/newCustomData';
-// import RenderMixin from 'core/simulator/RenderMixin';
 
 
 export default {
@@ -843,6 +842,10 @@ export default {
 		/**********************************************************************
 		 * Simulation Stuff
 		 **********************************************************************/
+		downloadCustom() {
+			console.log(this.model);
+		},
+
 		addCustom(isIterate, isPrev) {
 			if (!isIterate) {
 				this.iterateCount = 0;
@@ -873,9 +876,17 @@ export default {
 
 			for (let i = 0; i < widgetNames.length; i++) {
 				if (widgets[widgetNames[i]].type == 'Image') {
+					let imgObj = {
+						// url: `url(${newCustomData[this.iterateCount][widgets[widgetNames[i]].name]})`,
+						url: newCustomData[this.iterateCount][widgets[widgetNames[i]].name],
+						name:  widgetNames[i] + 'image'
+					}
+					this.model.widgets[widgetNames[i]].style.backgroundImage = imgObj;
+					// this.model.widgets[widgetNames[i]].style.backgroundImage = `url(${newCustomData[this.iterateCount][widgets[widgetNames[i]].name]})`;
 					this.canvas.customSetting(widgetNames[i], newCustomData[this.iterateCount][widgets[widgetNames[i]].name], true);
 				}
 				else {
+					this.model.widgets[widgetNames[i]].props.label = newCustomData[this.iterateCount][widgets[widgetNames[i]].name];
 					this.canvas.customSetting(widgetNames[i], newCustomData[this.iterateCount][widgets[widgetNames[i]].name], false);
 				}
 			}
