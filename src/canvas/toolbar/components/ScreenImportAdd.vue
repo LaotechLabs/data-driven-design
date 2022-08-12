@@ -12,10 +12,18 @@
 							 	<div class="MatcScreenAddCntr MatcPadding">
 									 <div class="container-fluid">
 										<div class="row">
-											<div class="col-md-3 MatcCenter" data-dojo-attach-point="addCntr">
+											<div class="col-md-4 MatcCenter" data-dojo-attach-point="addCntr">
 											</div>
-											<div class="col-md-3 MatcCenter" data-dojo-attach-point="uploadCntr">
-												<span class="MatcUploaderIcon MatcMiddle mdi mdi-cloud-upload"></span>
+											<div class="col-md-4 MatcCenter" data-dojo-attach-point="addRotate">
+											</div>
+											<div class="col-md-4 MatcCenter" data-dojo-attach-point="addFB">
+											</div>
+											<div class="col-md-4 MatcCenter" data-dojo-attach-point="addYT">
+											</div>
+											<div class="col-md-4 MatcCenter" data-dojo-attach-point="addIG">
+											</div>
+											<div class="col-md-4 MatcCenter" data-dojo-attach-point="uploadCntr">
+												<!-- <span class="MatcUploaderIcon MatcMiddle mdi mdi-cloud-upload"></span> -->
 											</div>
 										</div>
 									</div>
@@ -99,23 +107,21 @@ export default {
 				db.div("MatcHint MatcMarginTop", "Create Empty Screen").build(this.addCntr);
 				this.own(on(add, touch.press, lang.hitch(this, "onAddScreen", false, 'none')));
 
-				var addRotate = db.div("MatcUploader").build(this.addCntr);
-				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
-				db.div("MatcHint MatcMarginTop", "Create Rotated Screen").build(this.addCntr);
+				var addRotate = db.div("MatcUploader").build(this.addRotate);
+				// db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
+				db.div("MatcHint MatcMarginTop", "Create Rotated Screen").build(this.addRotate);
 				this.own(on(addRotate, touch.press, lang.hitch(this, "onAddScreen", true, 'rotate')));
 
-				var addFB = db.div("MatcUploader").build(this.addCntr);
-				db.div("MatcHint MatcMarginTop", "Create Facebook Cover").build(this.addCntr);
+				var addFB = db.div("MatcUploader").build(this.addFB);
+				db.div("MatcHint MatcMarginTop", "Create Facebook Cover").build(this.addFB);
 				this.own(on(addFB, touch.press, lang.hitch(this, "onAddScreen", false, 'fb')));
 
-				var addYT = db.div("MatcUploader").build(this.addCntr);
-				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
-				db.div("MatcHint MatcMarginTop", "Create Youtube Banner").build(this.addCntr);
+				var addYT = db.div("MatcUploader").build(this.addYT);
+				db.div("MatcHint MatcMarginTop", "Create Youtube Banner").build(this.addYT);
 				this.own(on(addYT, touch.press, lang.hitch(this, "onAddScreen", false, 'yt')));
 
-				var addIG = db.div("MatcUploader").build(this.addCntr);
-				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
-				db.div("MatcHint MatcMarginTop", "Create Instagram Post").build(this.addCntr);
+				var addIG = db.div("MatcUploader").build(this.addIG);
+				db.div("MatcHint MatcMarginTop", "Create Instagram Post").build(this.addIG);
 				this.own(on(addIG, touch.press, lang.hitch(this, "onAddScreen", false, 'ig')));
 
 				var upload = db.div("MatcUploader").build(this.uploadCntr);
