@@ -141,9 +141,8 @@
 							<span class="MatcToolbarLabel">⪼</span>
 						</a>
 
-						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="downloadButton">
-							<!-- <span class="mdi mdi-arrow-right-thick" style="vertical-align:middle" data-dojo-attach-point="simulatorIcon"></span> -->
-							<span class="MatcToolbarLabel">Download</span>
+						<a class="" data-dojo-attach-point="downloadButton">
+							<span class="MatcToolbarLabel"></span>
 						</a>
 
 

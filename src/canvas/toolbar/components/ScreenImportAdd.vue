@@ -12,9 +12,9 @@
 							 	<div class="MatcScreenAddCntr MatcPadding">
 									 <div class="container-fluid">
 										<div class="row">
-											<div class="col-md-6 MatcCenter" data-dojo-attach-point="addCntr">
+											<div class="col-md-3 MatcCenter" data-dojo-attach-point="addCntr">
 											</div>
-											<div class="col-md-6 MatcCenter" data-dojo-attach-point="uploadCntr">
+											<div class="col-md-3 MatcCenter" data-dojo-attach-point="uploadCntr">
 												<span class="MatcUploaderIcon MatcMiddle mdi mdi-cloud-upload"></span>
 											</div>
 										</div>
@@ -105,7 +105,6 @@ export default {
 				this.own(on(addRotate, touch.press, lang.hitch(this, "onAddScreen", true, 'rotate')));
 
 				var addFB = db.div("MatcUploader").build(this.addCntr);
-				db.div("MatcUploaderIcon MatcMiddle mdi mdi-crop-portrait").build(addRotate);
 				db.div("MatcHint MatcMarginTop", "Create Facebook Cover").build(this.addCntr);
 				this.own(on(addFB, touch.press, lang.hitch(this, "onAddScreen", false, 'fb')));
 
