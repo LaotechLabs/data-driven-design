@@ -50,7 +50,7 @@
                                 </div>
                                 <span class="MatcErrorLabel">{{errorMessage}}</span>
                                 <div class="MatcButtonBar">
-                                    <a class="MatcButton" @click="signup">SignUp</a> 
+                                    <a class="MatcButton" @click="customSignup">SignUp</a> 
                                 </div>
                             </div>
                         </div> <!-- new -->
@@ -189,6 +189,18 @@ export default {
             this.hasLoginError = false
         }
       },
+
+        // example token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImlzcyI6Ik1BVEMiLCJpZCI6IjYyZmI5ZTU4MjgwZWZkNWEwOGJlODQ0MyIsImV4cCI6MTY2MTI2MjA0MSwiZW1haWwiOiJnZnNnZnNnIn0.DXeq_xvTZsdjCHmPDd9YsJifgmq7NQWDF3MUVQzzmAo
+      async customSignup() {
+        let someUser = {
+            email: 'soememail',
+            password: 'somepass',
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImlzcyI6Ik1BVEMiLCJpZCI6IjYyZmI5ZTU4MjgwZWZkNWEwOGJlODQ0MyIsImV4cCI6MTY2MTI2MjA0MSwiZW1haWwiOiJnZnNnZnNnIn0.DXeq_xvTZsdjCHmPDd9YsJifgmq7NQWDF3MUVQzzmAo"
+        }
+        this.$emit('login', someUser);
+        this.$root.$emit('UserLogin', someUser);
+      },
+
       async signup() {
         this.logger.info('signup', 'enter ', this.email)
 
@@ -223,7 +235,7 @@ export default {
                 password: this.password,
             })
             this.$emit('login', user);
-            this.$root.$emit('UserLogin', user)
+            this.$root.$emit('UserLogin', user);
             this.logger.log(-1,'signup', 'exit with login', this.email)
         }
       },

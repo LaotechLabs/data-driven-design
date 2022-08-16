@@ -26,7 +26,12 @@ class UserService extends AbstractService{
     }
 
     async login (data) {
-        let user = await this._post('rest/login/', data)
+        console.log(data);
+        // let user = await this._post('rest/login/', data)
+        let user = {
+            email: 'soememail',
+            password: 'somepass'
+        }
         if (!user.errors) {
             this.setUser(user)
         }
