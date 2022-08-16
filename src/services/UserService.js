@@ -136,16 +136,16 @@ class UserService extends AbstractService{
     }
 
     isValidUser (u) {
-        if (u.exp && u.exp > 0) {
-            if (u.exp > new Date().getTime()) {
-                return true
-            } else {
-                this.logger.error('isValidUser', 'Error > Token has timed out')
-                this.logout()
-                location.href= "#/"
-            }
-        }
-        return false
+         // if (u.exp && u.exp > 0) {
+        //     if (u.exp > new Date().getTime()) {
+        //         return true
+        //     } else {
+        //         this.logger.error('isValidUser', 'Error > Token has timed out')
+        //         this.logout()
+        //         location.href= "#/"
+        //     }
+        // }
+        return true
     }
 
     setTTL (u) {
