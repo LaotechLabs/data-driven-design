@@ -136,6 +136,7 @@ class UserService extends AbstractService{
     }
 
     isValidUser (u) {
+        console.log(u);
          // if (u.exp && u.exp > 0) {
         //     if (u.exp > new Date().getTime()) {
         //         return true
