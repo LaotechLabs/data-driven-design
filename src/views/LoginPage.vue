@@ -173,14 +173,6 @@ export default {
         await Services.getUserService().reset(this.email)
         this.errorMessage = 'Check you mail.'
       },
-      async customSignup() {
-        let someUser = {
-            type: 'error',
-            errors: ["user.login.fail"]
-        }
-        this.$emit('login', someUser);
-        this.$root.$emit('UserLogin', someUser);
-      },
       async login () {
         this.logger.info('login', 'enter ', this.email)
         var result = await Services.getUserService().login({
