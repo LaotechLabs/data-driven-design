@@ -3,6 +3,7 @@
   "version": "4.0.83",
   "private": true,
   "scripts": {
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
@@ -49,5 +50,8 @@
     "sass-loader": "^12.0.0",
     "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.14"
+  },
+  "engines": {
+    "node": "^16.16.0"
   }
 }
