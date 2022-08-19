@@ -185,7 +185,9 @@ export default {
         let summaries = await Services.getModelService().findPublicSummaries();
         this.setLoadingPreview(summaries);
       } else {
-        let summaries = await Services.getModelService().findMyAppSummaries();
+        console.log('this ran');
+        // let summaries = await Services.getModelService().findMyAppSummaries();
+        let summaries = [];
         this.setLoadingPreview(summaries);
       }
     },
