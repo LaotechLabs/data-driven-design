@@ -1,5 +1,5 @@
 {
     "rewrites": [
-      { "source": "/rest", "destination": "https://v1.quant-ux.com" }
+      { "source": "/rest/:path*", "destination": "https://v1.quant-ux.com/:path" }
     ]
   }
