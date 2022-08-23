@@ -123,6 +123,7 @@ export default class AbstractService {
                 body: JSON.stringify(data),
                 headers: this._createDefaultHeader()
             }).then((res) => {
+                console.log(res);
                 if (res.status === 200) {
                     res.json().then(j => {
                         this.logger.log(6, '_post', 'exit ')

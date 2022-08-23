@@ -50,7 +50,7 @@
                                 </div>
                                 <span class="MatcErrorLabel">{{errorMessage}}</span>
                                 <div class="MatcButtonBar">
-                                    <a class="MatcButton" @click="customSignup">SignUp</a> 
+                                    <a class="MatcButton" @click="signup">SignUp</a> 
                                 </div>
                             </div>
                         </div> <!-- new -->
@@ -94,13 +94,9 @@
     @import "../style/scss/login.scss";
 </style>
 <script>
-
-
 import Services from 'services/Services'
 import Logger from 'common/Logger'
 import CheckBox from '../common/CheckBox.vue'
-
-
 export default {
   name: "Header",
   mixins: [],
@@ -141,22 +137,18 @@ export default {
       },
       async resetPassword () {
         this.logger.info('resetPassword', 'enter ', this.email)
-
         if (this.email.length < 2) {
             this.errorMessage = "Please enter your email"
             return;
         }
-
         if (this.password.length < 6) {
             this.errorMessage = "Password too short"
             return;
         }
-
         if (this.resetToken.length < 6) {
             this.errorMessage = "Token is wrong"
             return;
         }
-
         let result = await Services.getUserService().reset2(this.email, this.password, this.resetToken)
         if (result.type === 'error') {
             this.errorMessage = 'Someything is wrong'
@@ -189,31 +181,16 @@ export default {
             this.hasLoginError = false
         }
       },
-
-        // example token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImlzcyI6Ik1BVEMiLCJpZCI6IjYyZmI5ZTU4MjgwZWZkNWEwOGJlODQ0MyIsImV4cCI6MTY2MTI2MjA0MSwiZW1haWwiOiJnZnNnZnNnIn0.DXeq_xvTZsdjCHmPDd9YsJifgmq7NQWDF3MUVQzzmAo
-      async customSignup() {
-        let someUser = {
-            email: 'soememail',
-            password: 'somepass',
-            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoidXNlciIsImlzcyI6Ik1BVEMiLCJpZCI6IjYyZmI5ZTU4MjgwZWZkNWEwOGJlODQ0MyIsImV4cCI6MTY2MTI2MjA0MSwiZW1haWwiOiJnZnNnZnNnIn0.DXeq_xvTZsdjCHmPDd9YsJifgmq7NQWDF3MUVQzzmAo"
-        }
-        this.$emit('login', someUser);
-        this.$root.$emit('UserLogin', someUser);
-      },
-
       async signup() {
         this.logger.info('signup', 'enter ', this.email)
-
         if (this.password.length < 6) {
             this.errorMessage = "Password too short"
             return;
         }
-
         if (this.tos !== true) {
             this.errorMessage = "Please accept terms of service"
             return;
         }
-
         var result = await Services.getUserService().signup({
             email:this.email,
             password: this.password,
@@ -235,7 +212,7 @@ export default {
                 password: this.password,
             })
             this.$emit('login', user);
-            this.$root.$emit('UserLogin', user);
+            this.$root.$emit('UserLogin', user)
             this.logger.log(-1,'signup', 'exit with login', this.email)
         }
       },
@@ -251,7 +228,6 @@ export default {
         this.logger.log(-1,'mounted', 'reset ')
         this.tab = 'reset'
     }
-
     this.config = Services.getConfig()
     this.logger.log(-1,'mounted', 'exit > ', this.config.user)
   }

@@ -26,12 +26,8 @@ class UserService extends AbstractService{
     }
 
     async login (data) {
-        console.log(data);
-        // let user = await this._post('rest/login/', data)
-        let user = {
-            email: 'soememail',
-            password: 'somepass'
-        }
+        let user = await this._post('rest/login/', data);
+        console.log(user);
         if (!user.errors) {
             this.setUser(user)
         }
@@ -136,7 +132,7 @@ class UserService extends AbstractService{
     }
 
     isValidUser (u) {
-         if (u.exp && u.exp > 0) {
+        if (u.exp && u.exp > 0) {
             if (u.exp > new Date().getTime()) {
                 return true
             } else {
