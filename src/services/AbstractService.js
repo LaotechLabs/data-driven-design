@@ -115,6 +115,7 @@ export default class AbstractService {
     }
 
     _post(url, data, successCallback, errorCallback) {
+        console.log(url);
         this.logger.log(6, '_post', 'enter ' + url)
         return new Promise((resolve, reject) => {
             fetch(url, {
