@@ -166,6 +166,10 @@ export default {
         this.errorMessage = 'Check you mail.'
       },
       async login () {
+        fetch('/rest')
+            .then(res => {
+                console.log(res);
+            }) 
         this.logger.info('login', 'enter ', this.email)
         var result = await Services.getUserService().login({
             email:this.email,
