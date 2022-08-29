@@ -6,7 +6,7 @@ const proxyMiddleware = require('http-proxy-middleware')
 const helmet = require("helmet");
 
 /**
- * Some config stuff
+ * Some config stuffs
  */
 const host = '0.0.0.0'
 const assetsRoot = path.resolve(__dirname, '../dist')
