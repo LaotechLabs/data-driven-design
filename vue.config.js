@@ -4,8 +4,8 @@ module.exports = {
     proxy: {
       '^/rest': {
         // target:  'http://localhost:8082',
-        // target: 'https://v1.quant-ux.com',
-        target: 'http://18.223.116.218:8082',
+        target: 'https://v1.quant-ux.com',
+        // target: 'http://18.223.116.218:8082',
         ws: true,
         changeOrigin: true
       }
