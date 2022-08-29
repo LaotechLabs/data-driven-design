@@ -1,0 +1,1 @@
+web: sh -c 'npm run build && node server/start.js'
