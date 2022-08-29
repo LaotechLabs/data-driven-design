@@ -12,7 +12,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 ENV TZ=America/Chicago
 
 ## Set ENV vars here
-ENV QUX_PROXY_URL=http://qux-be.quantux.com:8080 \
+ENV QUX_PROXY_URL=http://18.223.116.218:8082 \
     QUX_WS_URL=wss://qux-ws.quantux.com:8086 \
     QUX_AUTH=qux \ 
     QUX_KEYCLOAK_REALM="qux" \ 
@@ -20,9 +20,9 @@ ENV QUX_PROXY_URL=http://qux-be.quantux.com:8080 \
     QUX_KEYCLOAK_URL=https://kezcloak.quantux.com:8180
 
 ## Clone the frontend repo
-RUN git clone https://github.com/KlausSchaefers/quant-ux.git
+RUN git clone https://github.com/rohankshah/quant-ux-fresh.git
 
-RUN cd quant-ux && npm install && npm run build
+RUN cd quant-ux-fresh && npm install && npm run build
 
 RUN cd
 
