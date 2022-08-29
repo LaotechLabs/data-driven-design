@@ -3,9 +3,9 @@ FROM node:16-alpine
 RUN apk --no-cache add git
 RUN apk --no-cache add bash
 
-RUN mkdir -p /usr/src/quant-ux
+RUN mkdir -p /usr/src/quant-ux-fresh
 
-WORKDIR /usr/src/quant-ux
+WORKDIR /usr/src/quant-ux-fresh
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -30,4 +30,4 @@ RUN cd
 EXPOSE 8082
 
 ## Start the server running
-CMD [ "node", "quant-ux/server/start.js" ]
+CMD [ "node", "quant-ux-fresh/server/start.js" ]
