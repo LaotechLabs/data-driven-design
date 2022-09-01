@@ -14,6 +14,7 @@ import touch from "dojo/touch";
 import Logger from "common/Logger";
 import CheckBox from "common/CheckBox";
 import DomBuilder from "common/DomBuilder";
+import CreatePagePreview from "page/CreatePagePreview";
 
 export default {
   name: "ScreenSizeSelector",
@@ -107,7 +108,7 @@ export default {
         css.add(c.domNode, "MatcVerticalMiddle");
         c.placeAt(div);
 
-        this.own(on(div, touch.press, lang.hitch(this, "onTypePress", id)));
+        this.own(on(div, touch.press, lang.hitch(this, "onTypePress", id, type)));
 
         this._checks[id] = c;
         this._divs[id] = div;
@@ -159,13 +160,15 @@ export default {
       this.$emit("change", this.getValue());
     },
 
-    onTypePress: function(type) {
+    onTypePress: function(type, obj) {
       this.cleanup();
       this._checks[type].setValue(true);
       css.add(this._divs[type], "MatcScreenSizeItemSelected");
       this.value = this.types[type];
       this._isCustom = false;
       this.$emit("change", this.getValue());
+      console.log(obj.screenSize);
+      CreatePagePreview.methods.changeSize(obj.screenSize.h * 0.27, obj.screenSize.w * 0.27)
     },
 
     setValue: function(m) {

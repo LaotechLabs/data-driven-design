@@ -1489,3 +1489,13 @@ textarea.MatcContentWidgetAbs{
 .MatcDeleteDialog p{
 	height: 80px;
 }
+
+ /****************************************************
+ * Custom
+ ****************************************************/
+
+.CreatePagePreview {
+	height: 40em;
+	width: 35em;
+	background-color: rgb(230,230,230);
+}

@@ -44,7 +44,7 @@
                                         <label class="">Password</label>
                                         <input class=" form-control input-lg" placeholder="Your password" type="password" v-model="password" @keyup.enter="signup">
                                     </div>
-                                    <div class=" form-group has-feedback" >
+                                    <div class=" form-group has-feedback" style="display: none" >
                                         <CheckBox v-model="tos" label="I accept the term of service"/>
                                     </div>
                                 </div>
@@ -191,14 +191,14 @@ export default {
             this.errorMessage = "Password too short"
             return;
         }
-        if (this.tos !== true) {
-            this.errorMessage = "Please accept terms of service"
-            return;
-        }
+        // if (this.tos !== true) {
+        //     this.errorMessage = "Please accept terms of service"
+        //     return;
+        // }
         var result = await Services.getUserService().signup({
             email:this.email,
             password: this.password,
-            tos: this.tos
+            tos: true
         })
         if (result.type == "error") {
             if (result.errors.indexOf("user.create.domain") >= 0) {

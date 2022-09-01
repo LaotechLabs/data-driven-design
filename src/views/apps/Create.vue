@@ -18,6 +18,14 @@
               </div>
             </form>
           </div>
+          <div class="column is-6">
+            <div class="field" style="visibility: hidden">
+                <label>Name</label>
+                <input type="text" class="input" v-model="name" placeholder="Enter App name" ref="inputName"/>
+                <div data-binding-error="name"></div>
+              </div>
+            <CreatePagePreview />
+          </div>
         </div>
 
         <div class="buttons mt-16">
@@ -36,6 +44,7 @@ import DojoWidget from "dojo/DojoWidget";
 import Services from "services/Services";
 import ScreenSizeSelector from "page/ScreenSizeSelector";
 import ModelFactory from "core/ModelFactory";
+import CreatePagePreview from "page/CreatePagePreview";
 
 export default {
   name: "Create",
@@ -48,7 +57,8 @@ export default {
   },
   watch: {},
   components: {
-    ScreenSizeSelector: ScreenSizeSelector
+    ScreenSizeSelector: ScreenSizeSelector,
+    CreatePagePreview: CreatePagePreview
   },
   methods: {
     setType(t) {
