@@ -33,7 +33,7 @@
                 }
                 let two = new Two(params).appendTo(div);
                 let rect = two.makeRectangle(50, 10, width * 0.04, height * 0.04);
-                rect.fill = 'rgb(230,230,230)';
+                rect.fill = 'rgb(138,138,138)';
                 rect.opacity = 0.75;
                 rect.noStroke();
                 two.update();
