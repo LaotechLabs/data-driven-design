@@ -15,6 +15,7 @@ import Logger from "common/Logger";
 import CheckBox from "common/CheckBox";
 import DomBuilder from "common/DomBuilder";
 import CreatePagePreview from "page/CreatePagePreview";
+// import Two from "two.js";
 
 export default {
   name: "ScreenSizeSelector",
@@ -73,7 +74,7 @@ export default {
           screenSize: { w: 1920, h: 1080 },
           factor: 2
         },
-        "Instagram Post (Square)": {
+        "Instagram Post": {
           type: "tablet",
           screenSize: { w: 810, h: 810 },
           factor: 2
@@ -103,6 +104,9 @@ export default {
 
         var size = " " + type.screenSize.w + " x " + type.screenSize.h; //+ " @" + type.factor + "x" ;
         db.div("MatcHint MatcFontSmall", size).build(div);
+        
+        // Custom Icon class 
+        db.div("MatcMiddleCustom").build(div);
 
         let c = this.$new(CheckBox);
         css.add(c.domNode, "MatcVerticalMiddle");
@@ -223,6 +227,16 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {
+    // Get icon div 
+    let iconDivs = document.getElementsByClassName("MatcMiddleCustom");
+    Array.from(iconDivs).forEach(ele => {
+      let sizing = ele.previousSibling.innerHTML;
+      let sizes = sizing.split(" x ");
+
+      // Add custom icon
+      CreatePagePreview.methods.createIcon(sizes[1], sizes[0], ele);
+    })
+  }
 };
 </script>

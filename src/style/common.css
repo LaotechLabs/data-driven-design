@@ -252,6 +252,15 @@ a:FOCUS {
 	transform: translateY(-50%) translateX(-50%);
 }
 
+.MatcMiddleCustom {
+	height: 40%;
+	width: 35%;
+	left: 70%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+
 
 .MactNoBodyScroll {
 	height: 100%;
