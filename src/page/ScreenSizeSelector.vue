@@ -142,6 +142,10 @@ export default {
     },
 
     onCustomSelected: function() {
+      CreatePagePreview.methods.changeSize(0, 0);
+      if (this.inputH.value && this.inputW.value) {
+        CreatePagePreview.methods.changeSize(this.inputH.value * 0.27, this.inputW.value * 0.27);
+      }
       this.cleanup();
       this._checks["custom"].setValue(true);
       css.add(this._divs["custom"], "MatcScreenSizeItemSelected");
@@ -158,6 +162,7 @@ export default {
       };
       this._isCustom = true;
       this.$emit("change", this.getValue());
+      // CreatePagePreview.methods.changeSize(obj.screenSize.h * 0.27, obj.screenSize.w * 0.27);
     },
 
     onTypePress: function(type, obj) {
@@ -167,7 +172,6 @@ export default {
       this.value = this.types[type];
       this._isCustom = false;
       this.$emit("change", this.getValue());
-      console.log(obj.screenSize);
       CreatePagePreview.methods.changeSize(obj.screenSize.h * 0.27, obj.screenSize.w * 0.27)
     },
 
