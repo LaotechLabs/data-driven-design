@@ -28,6 +28,7 @@ import AnimationComposer from 'canvas/toolbar/dialogs/AnimationComposer'
 import ExportDialog from 'canvas/toolbar/dialogs/ExportDialog'
 import CustomFonts from 'canvas/toolbar/dialogs/CustomFonts'
 
+import SheetDialog from 'canvas/toolbar/dialogs/SheetDialog'
 import customData from '../../../customData';
 import { newCustomData } from 'src/newCustomData';
 import { addNewData } from 'src/newCustomData';
@@ -164,6 +165,25 @@ export default {
 			d.own(on(exportDialog, 'cancel', lang.hitch(d, "close")));
 			d.popup(div, e.target);
 
+		},
+
+		showSheetDialog(e) {
+
+			var d = new Dialog();
+
+			var db = new DomBuilder();
+
+			var div = db.div("").build();
+
+			var sheetDialog = this.$new(SheetDialog);
+			sheetDialog.placeAt(div);
+			setTimeout(() => {
+				sheetDialog.setModel(this.model);
+			}, 500)
+
+
+			d.own(on(sheetDialog, 'cancel', lang.hitch(d, "close")));
+			d.popup(div, e.target);
 		},
 
 
@@ -918,35 +938,23 @@ export default {
 			};
 		},
 
-		uploadCustom() {
-			var dialog = new Dialog();
+		uploadCustom(e) {
+			var d = new Dialog();
+
 			var db = new DomBuilder();
-			let popup = db.div("MatcDialog MatcHeaderDialog MatcPadding").build();
 
-			let cntr = db.div().build(popup);
-			db.h3("MatcDialogHeader", "Upload CSV").build(cntr);
-			dialog.own(on(dialog, "close", lang.hitch(this, "closeDialog")));
+			var div = db.div("").build();
 
-			// let add = db.div("MatcImageUploadPreview").build(popup);
-			// this.uploader = this.$new(Uploader,{size:70, url : '/rest/images/' + this.model.id, width:2});
-			// this.uploader.placeAt(add);
-			// this.uploader.setMode();
-			// this.uploader.initFileDnD(popup);
-
-			let area = db.input("", "", "Upload", "file").build(popup);
-			dialog.own(on(area, "change", lang.hitch(this, "onCustomFileUpload")));
-			// dialog.own(on(this.domNode, "mousedown", lang.hitch(this, "onCustomFileUpload")));
-			// dialog.own(on(this.domNode, "mouseup", lang.hitch(this, "onCustomFileUpload")));
-			// dialog.own(on(this.domNode, "click", lang.hitch(this, "onCustomFileUpload")));
-
-			let bar = db.div("MatcButtonBar MatcMarginTopXL").build(popup);
-			let cancel = db.a("MatcLinkButton ", "Cancel").build(bar);
+			var SheetDialog = this.$new(SheetDialog);
+			// exportDialog.setJwtToken(this.jwtToken);
+			SheetDialog.placeAt(div);
+			setTimeout(() => {
+				SheetDialog.setModel(this.model);
+			}, 500)
 
 
-			dialog.own(on(cancel, touch.press, lang.hitch(dialog, "close")));
-			// dialog.own(on(write, touch.press, lang.hitch(this, "_saveAs", inputName, dialog)));
-			dialog.popup(popup, this.home);
-			this.canvas.setState("simulate");
+			d.own(on(SheetDialog, 'cancel', lang.hitch(d, "close")));
+			d.popup(div, e.target);
 		},
 
 		exportCustom() {
