@@ -9,6 +9,11 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "dependencies": {
     "bulma": "^0.9.4",
     "d3": "^5.9.1",

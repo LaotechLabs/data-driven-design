@@ -176,6 +176,7 @@ export default {
 			var div = db.div("").build();
 
 			var sheetDialog = this.$new(SheetDialog);
+			sheetDialog.setJwtToken(this.jwtToken);
 			sheetDialog.placeAt(div);
 			setTimeout(() => {
 				sheetDialog.setModel(this.model);
