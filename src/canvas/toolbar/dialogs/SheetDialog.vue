@@ -27,7 +27,7 @@ import { stox, xtos } from "./xlsxspread";
 
 // import Dialogs from "canvas/toolbar/mixins/_Dialogs"
 // import { newCustomData } from 'src/newCustomData';
-import { addNewData } from 'src/newCustomData';
+import { addNewData, setWorkBook, workBook } from 'src/newCustomData';
 
 export default {
     name: 'SheetDialog',
@@ -67,6 +67,12 @@ export default {
             this.s = s;
         },
 
+        initExistingSheet(data) {
+            const s = new Spreadsheet("#grid", this.options)
+                            .loadData(stox(data));
+            this.s = s;
+        },
+
         onFileChange(e) {
             const file = e.target.files[0];
             const reader = new FileReader();
@@ -86,13 +92,19 @@ export default {
             let sheet = workBook.Sheets[workBook.SheetNames[0]]
             let data = XLSX.utils.sheet_to_json(sheet);
             addNewData(data);
+            setWorkBook(workBook);
         }
 
     },
     mounted() {
         this.logger = new Logger("SheetDialog");
         setTimeout(() => {
-            this.initSpreadSheet();
+            if (workBook == undefined) {
+                this.initSpreadSheet();
+            }
+            else {
+                this.initExistingSheet(workBook);
+            }
         }, 500)
     }
 }
