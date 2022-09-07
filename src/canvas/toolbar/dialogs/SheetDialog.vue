@@ -25,8 +25,6 @@ import * as fs from 'fs';
 XLSX.set_fs(fs);
 import { stox, xtos } from "./xlsxspread";
 
-// import Dialogs from "canvas/toolbar/mixins/_Dialogs"
-// import { newCustomData } from 'src/newCustomData';
 import { addNewData, setWorkBook, workBook } from 'src/newCustomData';
 
 export default {
@@ -53,7 +51,8 @@ export default {
     computed: {
     },
     methods: {
-
+        
+        // Methods to make it work 
         setModel(m) {
             this.model = m;
         },
@@ -61,6 +60,16 @@ export default {
         setJwtToken(t) {
             this.jwtToken = t
         },
+        
+
+        // Main methods
+        // 1. stox converts spreadsheet library object to XLSX library object. 
+        // 2. xtos converts XLSX library object to spreadsheet library object. 
+        // 3. to load data to grid, we need spreadsheet library object.
+        // 4. to convert data to JSON and export as file, we need XLSX library object. 
+        // 5. Apply button adds data to newCustomData.js
+        // 6. DataBinding functions on the toolbar access this data. These functions are present in the
+        // _Dialogs.vue file.
 
         initSpreadSheet() {
             const s = new Spreadsheet("#grid", this.options);
@@ -98,6 +107,8 @@ export default {
     },
     mounted() {
         this.logger = new Logger("SheetDialog");
+
+        // setTimeout ensures the library is completely imported before initialising grid, I think
         setTimeout(() => {
             if (workBook == undefined) {
                 this.initSpreadSheet();
@@ -105,7 +116,7 @@ export default {
             else {
                 this.initExistingSheet(workBook);
             }
-        }, 500)
+        }, 500)  // Can experiment with time 
     }
 }
 </script>
