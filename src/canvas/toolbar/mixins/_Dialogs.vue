@@ -872,7 +872,7 @@ export default {
 				this.iterateCount = 0;
 			}
 
-			let len = newCustomData.length - 1;
+			let len = newCustomData.length;
 
 			if (isPrev) {
 				if (this.iterateCount == 0) {
@@ -889,6 +889,10 @@ export default {
 				else {
 					this.iterateCount++;
 				}
+			}
+
+			if (!isPrev && !isIterate) {
+				this.iterateCount = 0;
 			}
 
 

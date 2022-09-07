@@ -25,6 +25,10 @@ import * as fs from 'fs';
 XLSX.set_fs(fs);
 import { stox, xtos } from "./xlsxspread";
 
+// import Dialogs from "canvas/toolbar/mixins/_Dialogs"
+// import { newCustomData } from 'src/newCustomData';
+import { addNewData } from 'src/newCustomData';
+
 export default {
     name: 'SheetDialog',
     mixins: [Util, DojoWidget],
@@ -81,7 +85,7 @@ export default {
             let workBook = xtos(this.s.getData());
             let sheet = workBook.Sheets[workBook.SheetNames[0]]
             let data = XLSX.utils.sheet_to_json(sheet);
-            console.log(data);
+            addNewData(data);
         }
 
     },
