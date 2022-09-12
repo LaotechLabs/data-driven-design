@@ -710,18 +710,6 @@ export default class Screen extends CopyPaste {
 	 * Screen props
 	 **********************************************************************/
 
-	customAddGrid() {
-		var screens = this.model.screens;
-		Object.keys(screens).forEach(ele => {
-			var screen = screens[ele];
-			var h = screen.h/50;
-			screen['style']['background-image'] = `repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
-			repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%)`;
-			screen['style']['background-size'] = `${h}px ${h}px`;
-			this.renderScreen(screen);
-		})
-	}
-
 	updateScreenProperties (id, props, type){
 		this.logger.log(0,"updateScreenProperties", "enter > " + props);
 

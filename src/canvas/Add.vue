@@ -268,11 +268,11 @@ export default {
 			var h;
 			params.obj.h > params.obj.w ? h = params.obj.h : h = params.obj.w;
 			h = h/50;  
-			screen['style']['background-image'] = `repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
-			repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%)`;
+			screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
+			repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
 			screen['style']['background-size'] = `${h}px ${h}px`;
 
-			//    
+			// End
 
 
 			this._onAddNDropStart(div, screen, params.event, "onScreenAdded");
@@ -283,7 +283,6 @@ export default {
 			this.controller.addScreen(model, pos);
 			this._onAddDone();
 			this.setState(0);
-			// this.controller.customAddGrid();
 		},
 
 		/**********************************************************************
