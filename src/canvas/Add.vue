@@ -261,6 +261,20 @@ export default {
 			var div = this.createScreen(zoomedScreen);
 			css.add(div, "MatcAddBox")
 			this.renderFactory.setStyle(div, zoomedScreen);
+
+			// Add Custom grid
+			// 50 is the factor size here, i.e. Cell is 50th of total size
+
+			var h;
+			params.obj.h > params.obj.w ? h = params.obj.h : h = params.obj.w;
+			h = h/50;  
+			screen['style']['background-image'] = `repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+			repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%)`;
+			screen['style']['background-size'] = `${h}px ${h}px`;
+
+			//    
+
+
 			this._onAddNDropStart(div, screen, params.event, "onScreenAdded");
 			this.setState(3);
 		},
@@ -269,6 +283,7 @@ export default {
 			this.controller.addScreen(model, pos);
 			this._onAddDone();
 			this.setState(0);
+			// this.controller.customAddGrid();
 		},
 
 		/**********************************************************************

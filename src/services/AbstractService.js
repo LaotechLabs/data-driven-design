@@ -115,7 +115,6 @@ export default class AbstractService {
     }
 
     _post(url, data, successCallback, errorCallback) {
-        console.log(url);
         this.logger.log(6, '_post', 'enter ' + url)
         return new Promise((resolve, reject) => {
             fetch(url, {
@@ -124,7 +123,6 @@ export default class AbstractService {
                 body: JSON.stringify(data),
                 headers: this._createDefaultHeader()
             }).then((res) => {
-                console.log(res);
                 if (res.status === 200) {
                     res.json().then(j => {
                         this.logger.log(6, '_post', 'exit ')

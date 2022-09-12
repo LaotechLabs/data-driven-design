@@ -141,7 +141,6 @@ export default {
 			onAddScreen (rotate, type, e){
 				this.stopEvent(e);
 				var screen = this.createEmptyScreen(0,0,"Screen", rotate, type);
-				console.log(screen);
 				screen._type = "Screen";
 				this.hideDropDown();
 				this.emit("onAdd", screen, e);
