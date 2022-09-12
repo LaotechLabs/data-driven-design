@@ -224,6 +224,7 @@ import EditModeButton from "canvas/toolbar/components/EditModeButton"
 import CollabUser from "canvas/toolbar/components/CollabUser"
 import HelpButton from 'help/HelpButton'
 
+import { cellSize, setCellSize } from 'src/newCustomData.js'
 
 
 export default {
@@ -271,7 +272,8 @@ export default {
 			this.own(on(this.deleteBtn, touch.press, lang.hitch(this, "onDelete")));
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
-			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
+			// this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
+			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onChangeGridSize")));
 
 			this.own(on(this.editTool, touch.press, lang.hitch(this, "onEdit")));
 			this.own(on(this.moveTool, touch.press, lang.hitch(this, "onMove")));
@@ -953,6 +955,35 @@ export default {
 			this.stopEvent(e);
 
 			this.emit("mapItems");
+		},
+
+		onChangeGridSize (e){
+			this.stopEvent(e);
+			setCellSize();
+			let scale;
+			if (cellSize == 0) {
+				scale = 75;
+			}
+			else if (cellSize == 1) {
+				scale = 50;
+			}
+			else if (cellSize == 2) {
+				scale = 25;
+			}
+			let screens = this.model.screens;
+			Object.keys(screens).forEach(screenName => {
+				let screen = screens[screenName];
+				let h;
+				let height = screen.h;
+				let width = screen.w;
+				height > width ? h = height : h = width;
+				h = h/scale;  
+				screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
+				repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
+				screen['style']['background-size'] = `${h}px ${h}px`;
+				// this.controller.renderScreen(screen);
+				this.controller.render();
+			})
 		},
 
 		setDataBinding (d, dataBindingWidget){
