@@ -959,7 +959,11 @@ export default {
 
 		onChangeGridSize (e){
 			this.stopEvent(e);
+
+			// Change cell size in newCustomData.js
 			setCellSize();
+
+			// set scale according to cellsize value from newCustomData.js
 			let scale;
 			if (cellSize == 0) {
 				scale = 75;
@@ -970,6 +974,8 @@ export default {
 			else if (cellSize == 2) {
 				scale = 25;
 			}
+
+			// Iterate through screens and update style 
 			let screens = this.model.screens;
 			Object.keys(screens).forEach(screenName => {
 				let screen = screens[screenName];
@@ -981,7 +987,8 @@ export default {
 				screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
 				repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
 				screen['style']['background-size'] = `${h}px ${h}px`;
-				// this.controller.renderScreen(screen);
+
+				// Render updated screen
 				this.controller.render();
 			})
 		},
