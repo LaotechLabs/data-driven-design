@@ -273,7 +273,7 @@ export default {
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
 			// this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
-			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onChangeGridSize")));
+			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "consoleHello")));
 
 			this.own(on(this.editTool, touch.press, lang.hitch(this, "onEdit")));
 			this.own(on(this.moveTool, touch.press, lang.hitch(this, "onMove")));
@@ -955,6 +955,12 @@ export default {
 			this.stopEvent(e);
 
 			this.emit("mapItems");
+		},
+
+		consoleHello(e) {
+			this.stopEvent(e);
+
+			console.log("Hello");
 		},
 
 		onChangeGridSize (e){

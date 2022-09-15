@@ -5,7 +5,6 @@ import css from 'dojo/css'
 import win from 'dojo/_base/win'
 import ModelUtil from 'core/ModelUtil'
 
-import {cellSize} from 'src/newCustomData.js'
 
 export default {
     name: 'Add',
@@ -267,22 +266,22 @@ export default {
 			// Add Custom grid
 			// 50 is the factor size here, i.e. Cell is 50th of total size
 
-			let scale;
-			if (cellSize == 0) {
-				scale = 75;
-			}
-			else if (cellSize == 1) {
-				scale = 50;
-			}
-			else if (cellSize == 2) {
-				scale = 25;
-			}
-			var h;
-			params.obj.h > params.obj.w ? h = params.obj.h : h = params.obj.w;
-			h = h/scale;  
-			screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
-			repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
-			screen['style']['background-size'] = `${h}px ${h}px`;
+			// let scale;
+			// if (cellSize == 0) {
+			// 	scale = 75;
+			// }
+			// else if (cellSize == 1) {
+			// 	scale = 50;
+			// }
+			// else if (cellSize == 2) {
+			// 	scale = 25;
+			// }
+			// var h;
+			// params.obj.h > params.obj.w ? h = params.obj.h : h = params.obj.w;
+			// h = h/scale;  
+			// screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
+			// repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
+			// screen['style']['background-size'] = `${h}px ${h}px`;
 
 			// End
 
