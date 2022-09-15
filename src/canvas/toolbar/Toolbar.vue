@@ -273,7 +273,7 @@ export default {
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
 			// this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
-			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "consoleHello")));
+			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "customGrid")));
 
 			this.own(on(this.editTool, touch.press, lang.hitch(this, "onEdit")));
 			this.own(on(this.moveTool, touch.press, lang.hitch(this, "onMove")));
@@ -957,10 +957,22 @@ export default {
 			this.emit("mapItems");
 		},
 
-		consoleHello(e) {
+		customGrid(e) {
 			this.stopEvent(e);
 
-			console.log("Hello");
+			Array.from(document.getElementsByClassName("MatcScreenDnD")).forEach(ele => {
+				ele.addEventListener("click", this.getScreenCoordAndName)
+			})
+		},
+
+		getScreenCoordAndName(e) {
+			if (e.srcElement._screenID) {
+					let screenId = e.srcElement._screenID;
+					console.log(this.model.screens[screenId]);
+				}
+			const x = e.pageX - e.currentTarget.getBoundingClientRect().x; 
+    		const y = e.pageY - e.currentTarget.getBoundingClientRect().y; 
+			console.log(x, y)
 		},
 
 		onChangeGridSize (e){

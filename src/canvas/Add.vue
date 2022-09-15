@@ -261,7 +261,14 @@ export default {
 			var zoomedScreen = this.getZoomedBox(lang.clone(screen),z,z);
 			var div = this.createScreen(zoomedScreen);
 			css.add(div, "MatcAddBox")
+
 			this.renderFactory.setStyle(div, zoomedScreen);
+
+			// var layer = document.createElement("div");
+			// layer.className = 'customGridLayer';
+			// div.appendChild(layer);
+			// div.children[0].setAttribute("style", "background-color:lightblue; position: absolute; height:100%; width: 100%;  pointer-events: none; z-index: -300");
+
 
 			// Add Custom grid
 			// 50 is the factor size here, i.e. Cell is 50th of total size
@@ -284,7 +291,6 @@ export default {
 			// screen['style']['background-size'] = `${h}px ${h}px`;
 
 			// End
-
 
 			this._onAddNDropStart(div, screen, params.event, "onScreenAdded");
 			this.setState(3);
