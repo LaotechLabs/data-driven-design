@@ -859,7 +859,6 @@ export default {
 			this.canvas.setState(0);
 		},
 
-
 		/**********************************************************************
 		 * Simulation Stuff
 		 **********************************************************************/
@@ -885,7 +884,7 @@ export default {
 			if (!isPrev) {
 				if (this.iterateCount == len - 1) {
 					this.iterateCount = 0;
-				} 
+				}
 				else {
 					this.iterateCount++;
 				}
@@ -904,7 +903,7 @@ export default {
 					let imgObj = {
 						// url: `url(${newCustomData[this.iterateCount][widgets[widgetNames[i]].name]})`,
 						url: newCustomData[this.iterateCount][widgets[widgetNames[i]].name],
-						name:  widgetNames[i] + 'image'
+						name: widgetNames[i] + 'image'
 					}
 					this.model.widgets[widgetNames[i]].style.backgroundImage = imgObj;
 					// this.model.widgets[widgetNames[i]].style.backgroundImage = `url(${newCustomData[this.iterateCount][widgets[widgetNames[i]].name]})`;

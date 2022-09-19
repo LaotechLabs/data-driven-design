@@ -320,7 +320,7 @@ export default {
 			if (this.model) {
 				this.cleanUpScreenButtons()
 				this.model = ModelUtil.createScalledModel(this.sourceModel, this.zoom)
-				this.updateDnD(this.model)
+				this.updateDnD(this.model);
 				/**
 				 * 4.0.40: We do not call renderSelection(),as this would also update the 
 				 * property panel. We just need to update the seelction handlers
@@ -649,6 +649,7 @@ export default {
 			var div = this.createBox(screen);
 			div._screenID = screen.id
 			css.add(div, "MatcScreenDnD");
+			css.add(div, screen.id);
 			return div;
 		},
 
@@ -722,10 +723,10 @@ export default {
 		createBox (box){
 			this.logger.log(6,"createBox", "enter");
 			var div = document.createElement("div");
-			var layer = document.createElement("div");
-			layer.className = 'customGridLayer';
-			div.appendChild(layer);
-			div.children[0].setAttribute("style", "background-color:lightblue; position: absolute; height:100%; width: 100%;  pointer-events: none; z-index: -300");
+			// var layer = document.createElement("div");
+			// layer.className = 'customGridLayer';
+			// div.appendChild(layer);
+			// div.children[0].setAttribute("style", "background-color:lightblue; position: absolute; height:100%; width: 100%;  pointer-events: none; z-index: -300");
 			this.domUtil.setBox(div, box)
 			css.add(div, "MatcBox");
 			return div;

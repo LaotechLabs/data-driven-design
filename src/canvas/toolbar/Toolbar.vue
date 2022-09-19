@@ -112,6 +112,10 @@
 							</a>
 			
 						</div>
+						
+						<!-- Dont remove, won't work -->
+
+
 
 						<a class="" data-dojo-attach-point="nextButton">
 							<!-- <span class="MatcToolbarLabel">Apply</span> -->
@@ -119,6 +123,18 @@
 
 						<a class="" data-dojo-attach-point="exportButton">
 							<!-- <span class="MatcToolbarLabel">Export</span> -->
+						</a>
+						
+
+
+						<!-- Till here -->
+
+						<a class="MatcToolbarItem" data-dojo-attach-point="addVertical">
+							<span class="mdi mdi-arrow-expand-up"></span>
+						</a>
+
+						<a class="MatcToolbarItem" data-dojo-attach-point="addHorizontal">
+							<span class="mdi mdi-arrow-expand-right"></span>
 						</a>
 
 						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="uploadButton">
@@ -224,7 +240,8 @@ import EditModeButton from "canvas/toolbar/components/EditModeButton"
 import CollabUser from "canvas/toolbar/components/CollabUser"
 import HelpButton from 'help/HelpButton'
 
-import { cellSize, setCellSize } from 'src/newCustomData.js'
+import { setCanvas, allCanvas } from 'src/newCustomData.js'
+import Konva from "konva";
 
 
 export default {
@@ -245,7 +262,9 @@ export default {
 			settings: {},
 			collabUsers:[],
 			showLabels:false,
-			isDeveloperMode: false
+			isDeveloperMode: false,
+			stage: {},
+      		layer: {}
         }
     },
 	components: {
@@ -270,6 +289,12 @@ export default {
 			this.own(on(this.copyBtn, touch.press, lang.hitch(this, "onCopy")));
 			this.own(on(this.pasteBtn, touch.press, lang.hitch(this, "onPaste")));
 			this.own(on(this.deleteBtn, touch.press, lang.hitch(this, "onDelete")));
+
+			// Grid lines
+			this.own(on(this.addVertical, touch.press, lang.hitch(this, "addVerticalLine")));
+			this.own(on(this.addHorizontal, touch.press, lang.hitch(this, "addHorizontalLine")));
+			// Ends
+
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
 			// this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
@@ -961,54 +986,76 @@ export default {
 			this.stopEvent(e);
 
 			Array.from(document.getElementsByClassName("MatcScreenDnD")).forEach(ele => {
-				ele.addEventListener("click", this.getScreenCoordAndName)
+				ele.addEventListener("click", (e) => {
+					this.getScreenCoordAndName(e, ele);
+				})
 			})
 		},
 
-		getScreenCoordAndName(e) {
+		getScreenCoordAndName(e, ele) {
+			console.log(ele);
 			if (e.srcElement._screenID) {
 					let screenId = e.srcElement._screenID;
 					console.log(this.model.screens[screenId]);
 				}
 			const x = e.pageX - e.currentTarget.getBoundingClientRect().x; 
     		const y = e.pageY - e.currentTarget.getBoundingClientRect().y; 
-			console.log(x, y)
+			console.log(x, y);
 		},
 
-		onChangeGridSize (e){
-			this.stopEvent(e);
+		initKonva(screen, id) {
+			let width = screen.w;
+			let height = screen.h;
+			
+			let stage = new Konva.Stage({
+				container: '.' + id,
+				width: width,
+				height: height,
+			});
+			// let k = document.getElementsByTagName("canvas");
+			// console.log(k)
+			// k.classList.add("MatcBox");
+			// k.classList.add("MatcWidgetDND");
+			// k.classList.add("test");
 
-			// Change cell size in newCustomData.js
-			setCellSize();
+			let layer = new Konva.Layer();
+			stage.add(layer);
+			this.layer = layer
+			this.stage = stage
+		},
 
-			// set scale according to cellsize value from newCustomData.js
-			let scale;
-			if (cellSize == 0) {
-				scale = 75;
+		addVerticalLine() {
+			console.log(allCanvas);
+			console.log(setCanvas);
+			let screen = this._selectedScreen;
+			let screenNode = document.getElementsByClassName("MatcBoxSelected")[0];
+			screenNode.classList.add(screen.id);
+			this.initKonva(screen, screen.id);
+			let line = this.newLine('vertical', screen);
+      		this.layer.add(line);
+		},
+
+		addHorizontalLine() {
+			console.log(this);
+		},
+
+		newLine(type, screen) {
+			let points;
+			if (type == 'horizonatal') {
+				points = [0, 20, screen.w, 20]
 			}
-			else if (cellSize == 1) {
-				scale = 50;
+			else {
+				points = [20, 0, 20, screen.h]
 			}
-			else if (cellSize == 2) {
-				scale = 25;
-			}
-
-			// Iterate through screens and update style 
-			let screens = this.model.screens;
-			Object.keys(screens).forEach(screenName => {
-				let screen = screens[screenName];
-				let h;
-				let height = screen.h;
-				let width = screen.w;
-				height > width ? h = height : h = width;
-				h = h/scale;  
-				screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
-				repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
-				screen['style']['background-size'] = `${h}px ${h}px`;
-
-				// Render updated screen
-				this.controller.render();
-			})
+			let line = new Konva.Line({
+				points: points,
+				stroke: 'grey',
+				strokeWidth: 3,
+				lineCap: 'round',
+				lineJoin: 'round',
+				draggable: true,
+			});
+			return line;
 		},
 
 		setDataBinding (d, dataBindingWidget){

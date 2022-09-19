@@ -261,13 +261,7 @@ export default {
 			var zoomedScreen = this.getZoomedBox(lang.clone(screen),z,z);
 			var div = this.createScreen(zoomedScreen);
 			css.add(div, "MatcAddBox")
-
 			this.renderFactory.setStyle(div, zoomedScreen);
-
-			// var layer = document.createElement("div");
-			// layer.className = 'customGridLayer';
-			// div.appendChild(layer);
-			// div.children[0].setAttribute("style", "background-color:lightblue; position: absolute; height:100%; width: 100%;  pointer-events: none; z-index: -300");
 
 
 			// Add Custom grid

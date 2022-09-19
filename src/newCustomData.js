@@ -1,6 +1,6 @@
 let newCustomData = {};
+let allCanvas = {};
 let workBook;
-let cellSize = 0;
 
 function addNewData(obj) {
     newCustomData = obj;
@@ -10,11 +10,8 @@ function setWorkBook(obj) {
     workBook = obj;
 }
 
-function setCellSize() {
-    cellSize += 1;
-    if (cellSize == 3) {
-        cellSize = 0;
-    }
+function setCanvas(canvas) {
+    allCanvas = canvas;
 }
 
-export {newCustomData, addNewData, workBook, setWorkBook, cellSize, setCellSize}
+export {newCustomData, addNewData, workBook, setWorkBook, allCanvas, setCanvas}
