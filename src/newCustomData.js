@@ -1,6 +1,7 @@
 let newCustomData = {};
-let allCanvas = {};
+let allCanvas = [];
 let workBook;
+let gridWidgets = [];
 
 function addNewData(obj) {
     newCustomData = obj;
@@ -14,4 +15,9 @@ function setCanvas(canvas) {
     allCanvas = canvas;
 }
 
-export {newCustomData, addNewData, workBook, setWorkBook, allCanvas, setCanvas}
+function setGridWidgets(widget) {
+    gridWidgets.push(widget);
+    console.log(gridWidgets);
+} 
+
+export {newCustomData, addNewData, workBook, setWorkBook, allCanvas, setCanvas, gridWidgets, setGridWidgets}

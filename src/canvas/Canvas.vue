@@ -346,6 +346,14 @@ export default {
 			this.active = false;
 		},
 
+		// Grid Button
+
+		onGridClick() {
+			console.log('click')
+		},
+
+		//
+
 
 
 		/***************************************************************************

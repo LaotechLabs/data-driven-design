@@ -240,7 +240,7 @@ import EditModeButton from "canvas/toolbar/components/EditModeButton"
 import CollabUser from "canvas/toolbar/components/CollabUser"
 import HelpButton from 'help/HelpButton'
 
-import { setCanvas, allCanvas } from 'src/newCustomData.js'
+import { setCanvas, allCanvas, gridWidgets } from 'src/newCustomData.js'
 import Konva from "konva";
 
 
@@ -1012,11 +1012,6 @@ export default {
 				width: width,
 				height: height,
 			});
-			// let k = document.getElementsByTagName("canvas");
-			// console.log(k)
-			// k.classList.add("MatcBox");
-			// k.classList.add("MatcWidgetDND");
-			// k.classList.add("test");
 
 			let layer = new Konva.Layer();
 			stage.add(layer);
@@ -1025,18 +1020,25 @@ export default {
 		},
 
 		addVerticalLine() {
-			console.log(allCanvas);
-			console.log(setCanvas);
-			let screen = this._selectedScreen;
-			let screenNode = document.getElementsByClassName("MatcBoxSelected")[0];
-			screenNode.classList.add(screen.id);
-			this.initKonva(screen, screen.id);
-			let line = this.newLine('vertical', screen);
-      		this.layer.add(line);
+			if (Object.keys(allCanvas).length !== 0) {
+				let canvas = allCanvas;
+				Object.keys(canvas).forEach(ele => {
+					Konva.Node.create(canvas[ele], '.' + ele)
+				})
+			}
+			else {
+				let screen = this._selectedScreen;
+				this.initKonva(screen, screen.id);
+				let line = this.newLine('vertical', screen);
+				this.layer.add(line);
+				let stageObj = {};
+				stageObj[`${screen.id}`] = this.stage.toJSON()
+				setCanvas(stageObj);
+			}
 		},
 
 		addHorizontalLine() {
-			console.log(this);
+			console.log(gridWidgets[0]);
 		},
 
 		newLine(type, screen) {
@@ -1053,7 +1055,7 @@ export default {
 				strokeWidth: 3,
 				lineCap: 'round',
 				lineJoin: 'round',
-				draggable: true,
+				draggable: true
 			});
 			return line;
 		},

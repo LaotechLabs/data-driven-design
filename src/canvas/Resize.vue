@@ -52,7 +52,10 @@ export default {
 
 
       showResizeHandles (box, id, parent, modelType, drawLines) {
-
+        if (this.getWidgetName(id) == 'Horizontal' || this.getWidgetName(id) == 'Vertical') {
+          return;
+        }
+        
         if (!this.resizeEnabled){
           return;
         }

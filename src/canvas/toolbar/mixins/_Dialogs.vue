@@ -154,17 +154,18 @@ export default {
 
 			var div = db.div("").build();
 
-			var exportDialog = this.$new(ExportDialog);
-			exportDialog.setJwtToken(this.jwtToken);
-			exportDialog.placeAt(div);
-			setTimeout(() => {
-				exportDialog.setModel(this.model);
-			}, 500)
+			this.removeCustomGridLines().then(res => {
+				var exportDialog = this.$new(ExportDialog);
+				exportDialog.setJwtToken(this.jwtToken);
+				exportDialog.placeAt(div);
+				setTimeout(() => {
+					exportDialog.setModel(res);
+				}, 500)
 
 
-			d.own(on(exportDialog, 'cancel', lang.hitch(d, "close")));
-			d.popup(div, e.target);
-
+				d.own(on(exportDialog, 'cancel', lang.hitch(d, "close")));
+				d.popup(div, e.target);
+			})
 		},
 
 		showSheetDialog(e) {
@@ -989,10 +990,59 @@ export default {
 			}
 		},
 
+		async removeCustomGridLines() {
+			let newModel = this.model
+			let screens = this.model.screens;
+			let widgets = this.model.widgets;
+			let gridLineArr = []
+
+			// checks widget type and pushes grid widget to array
+			await Object.keys(widgets).forEach(ele => {
+				if (widgets[ele].type == "Horizontal" || widgets[ele].type == "Vertical") {
+					gridLineArr.push(ele);
+				}
+			})
+
+			// removes grid widget from screens array 
+			await Object.keys(screens).forEach(screen => {
+				let children = screens[screen].children;
+				children = children.filter(ele => !gridLineArr.includes(ele));
+				screens[screen].children = children;
+			})
+
+			// sets removed grid widget screen array to model and returns
+			newModel.screens = screens;
+			return newModel;
+		},
+
 		startSimilator(count, download, dialogCloseAuto) {
 			this.logger.log(0, "startSimilator", "entry");
 			var pos = domGeom.position(win.body());
 			let maxHeight = pos.h - 100
+
+			let noGridLinesModel = this.removeCustomGridLines();
+
+			// let screens = this.model.screens;
+			// let widgets = this.model.widgets;
+			// let gridLineArr = []
+			// await Object.keys(widgets).forEach(ele => {
+			// 	if (widgets[ele].type == "Horizontal" || widgets[ele].type == "Vertical") {
+			// 		gridLineArr.push(ele);
+			// 	}
+			// })
+			// console.log(gridLineArr);
+			// await Object.keys(screens).forEach(screen => {
+			// 	let children = screens[screen].children;
+			// 	children = children.filter(ele => !gridLineArr.includes(ele));
+			// 	// let isFounded = children.some( ele => {
+			// 	// 	gridLineArr.includes(ele)
+			// 	// } );
+			// 	// console.log(isFounded);
+			// 	screens[screen].children = children;
+			// })
+
+			// this.model.screens = screens;
+
 			/**
 			 * Since 2.1.7 we have better scalling.
 			 * Keep in sync with the ShareCanvas.startSimulator() method
@@ -1003,16 +1053,16 @@ export default {
 			if (this.model.type === "desktop") {
 				pos.w = pos.w * 0.75;
 				pos.h = pos.h * 0.75;
-				this._showDesktopSimulator(this.model, pos, maxHeight, count, download, dialogCloseAuto);
+				this._showDesktopSimulator(noGridLinesModel, pos, maxHeight, count, download, dialogCloseAuto);
 			} else if (this.model.type === "tablet") {
 				if (this.model.screenSize.w > this.model.screenSize.h) {
 					pos.w = pos.w * 0.65;
 					pos.h = pos.h * 0.65;
-					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download, dialogCloseAuto);
+					this._showMobileTest(noGridLinesModel, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download, dialogCloseAuto);
 				} else {
 					pos.w = pos.w * 0.35;
 					pos.h = pos.h * 0.35;
-					this._showMobileTest(this.model, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download, dialogCloseAuto);
+					this._showMobileTest(noGridLinesModel, pos, "MatchSimulatorWrapperTablet", maxHeight, count, download, dialogCloseAuto);
 				}
 			} else {
 				pos.w = pos.w * 0.25;

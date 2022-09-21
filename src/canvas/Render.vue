@@ -14,6 +14,9 @@ import RenderFlow from 'canvas/RenderFlow'
 import Wiring from 'canvas/Wiring'
 import ModelUtil from 'core/ModelUtil'
 
+// import { allCanvas } from 'src/newCustomData.js'
+// import Konva from "konva";
+
 export default {
     name: 'Render',
     mixins:[_Color, RenderFlow, Wiring],
@@ -327,6 +330,12 @@ export default {
 				 */
 				this.updateSelection();
 				this.renderDistance();
+			// 	if (Object.keys(allCanvas).length !== 0) {
+			// 	let canvas = allCanvas;
+			// 	Object.keys(canvas).forEach(ele => {
+			// 		Konva.Node.create(canvas[ele], '.' + ele)
+			// 	})
+			// }
 			}
 		},
 

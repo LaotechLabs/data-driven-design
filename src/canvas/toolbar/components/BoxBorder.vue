@@ -296,7 +296,7 @@ export default {
 			},
 
 			setStyle:function(key, input, value){
-
+				
 				this.value[key] = value;
 				if(this.isLocked){
 					for(var i=0; i < 4; i++){
