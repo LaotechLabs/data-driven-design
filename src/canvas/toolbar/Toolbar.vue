@@ -240,8 +240,7 @@ import EditModeButton from "canvas/toolbar/components/EditModeButton"
 import CollabUser from "canvas/toolbar/components/CollabUser"
 import HelpButton from 'help/HelpButton'
 
-import { setCanvas, allCanvas, gridWidgets } from 'src/newCustomData.js'
-import Konva from "konva";
+import { gridWidgets } from 'src/newCustomData.js'
 
 
 export default {
@@ -1003,61 +1002,12 @@ export default {
 			console.log(x, y);
 		},
 
-		initKonva(screen, id) {
-			let width = screen.w;
-			let height = screen.h;
-			
-			let stage = new Konva.Stage({
-				container: '.' + id,
-				width: width,
-				height: height,
-			});
-
-			let layer = new Konva.Layer();
-			stage.add(layer);
-			this.layer = layer
-			this.stage = stage
-		},
-
 		addVerticalLine() {
-			if (Object.keys(allCanvas).length !== 0) {
-				let canvas = allCanvas;
-				Object.keys(canvas).forEach(ele => {
-					Konva.Node.create(canvas[ele], '.' + ele)
-				})
-			}
-			else {
-				let screen = this._selectedScreen;
-				this.initKonva(screen, screen.id);
-				let line = this.newLine('vertical', screen);
-				this.layer.add(line);
-				let stageObj = {};
-				stageObj[`${screen.id}`] = this.stage.toJSON()
-				setCanvas(stageObj);
-			}
+			this.canvas.addWidgetCustom(gridWidgets[1])
 		},
 
 		addHorizontalLine() {
-			console.log(gridWidgets[0]);
-		},
-
-		newLine(type, screen) {
-			let points;
-			if (type == 'horizonatal') {
-				points = [0, 20, screen.w, 20]
-			}
-			else {
-				points = [20, 0, 20, screen.h]
-			}
-			let line = new Konva.Line({
-				points: points,
-				stroke: 'grey',
-				strokeWidth: 3,
-				lineCap: 'round',
-				lineJoin: 'round',
-				draggable: true
-			});
-			return line;
+			this.canvas.addWidgetCustom(gridWidgets[0])
 		},
 
 		setDataBinding (d, dataBindingWidget){

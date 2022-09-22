@@ -342,11 +342,14 @@ export default {
 			 */
 			var widget = this.factory.createWidgetModel(params);
 			widget.id ="_tempWidget";
-
 			/**
 			 * Render drag and drop!
 			 */
 			this._addWidget(params, widget);
+		},
+
+		addWidgetCustom(widget) {
+			this._addWidget(widget, widget);
 		},
 
 		_addWidget (params, widget, mode){
