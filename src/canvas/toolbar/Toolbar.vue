@@ -1002,12 +1002,12 @@ export default {
 			console.log(x, y);
 		},
 
-		addVerticalLine() {
-			this.canvas.addWidgetCustom(gridWidgets[1])
+		addVerticalLine(e) {
+			this.canvas.addWidgetCustom(e, gridWidgets[1])
 		},
 
-		addHorizontalLine() {
-			this.canvas.addWidgetCustom(gridWidgets[0])
+		addHorizontalLine(e) {
+			this.canvas.addWidgetCustom(e, gridWidgets[0])
 		},
 
 		setDataBinding (d, dataBindingWidget){

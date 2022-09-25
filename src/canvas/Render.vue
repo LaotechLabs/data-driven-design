@@ -959,6 +959,15 @@ export default {
 			return pos;
 		},
 
+		getMousePosCustom(e) {
+			var pos = this._getMousePosition(e);
+			pos.x -= (this.domPos.x + this.canvasPos.x);
+			pos.y-= (this.domPos.y + this.canvasPos.y);
+			pos.x += 50;
+			pos.y += 50;
+			return pos;
+		},
+
 
 		/***************************************************************************
 			* Align
