@@ -61,8 +61,8 @@ export default {
           "name": "Vertical",
           "x": 0,
           "y": 0,
-          "w": 1,
-          "h": 1000,
+          "w": 4,
+          "h": 3000,
           "z": 0,
           "has": {
             "onclick": true,
@@ -70,7 +70,9 @@ export default {
             "label": true
           },
           "style": {
-            "background": "black"
+            "background": "black",
+            "padding": "5px",
+            "opacity": "0.3"
           }
         }
       ]

@@ -61,8 +61,8 @@ export default {
           "name": "Horizontal",
           "x": 0,
           "y": 0,
-          "w": 1000,
-          "h": 1,
+          "w": 3000,
+          "h": 4,
           "z": 0,
           "has": {
             "onclick": true,
@@ -70,7 +70,9 @@ export default {
             "label": true
           },
           "style": {
-            "background": "black"
+            "background": "black",
+            "padding": "5px",
+            "opacity": "0.5"
           }
         }
       ]

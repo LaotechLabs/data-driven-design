@@ -277,6 +277,13 @@
 }
 
 .MatcAddBox {
+	z-index: 99999;
+}
+
+.GridLayer {
+	height: 100%;
+	width: 100%;
+	background-color: grey;
 	z-index: 999999;
 }
 

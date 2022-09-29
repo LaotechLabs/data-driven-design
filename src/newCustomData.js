@@ -2,6 +2,7 @@ let newCustomData = {};
 let allCanvas = [];
 let workBook;
 let gridWidgets = [];
+let konvaObj = [];
 
 function addNewData(obj) {
     newCustomData = obj;
@@ -15,9 +16,12 @@ function setCanvas(canvas) {
     allCanvas = canvas;
 }
 
+function setKonvaObj(obj) {
+    konvaObj.push(obj);
+}
+
 function setGridWidgets(widget) {
     gridWidgets.push(widget);
-    console.log(gridWidgets);
-} 
+}
 
-export {newCustomData, addNewData, workBook, setWorkBook, allCanvas, setCanvas, gridWidgets, setGridWidgets}
+export { newCustomData, addNewData, workBook, setWorkBook, allCanvas, setCanvas, gridWidgets, setGridWidgets, konvaObj, setKonvaObj }

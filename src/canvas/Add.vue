@@ -5,6 +5,9 @@ import css from 'dojo/css'
 import win from 'dojo/_base/win'
 import ModelUtil from 'core/ModelUtil'
 
+// import { setKonvaObj } from 'src/newCustomData.js'
+// import Konva from 'konva';
+
 
 export default {
 	name: 'Add',
@@ -123,6 +126,7 @@ export default {
 			var div = this.createBox(boundingBox);
 			css.add(div, "MatcAddBox")
 
+
 			var children = group.children;
 			for (var i = 0; i < children.length; i++) {
 				var child = children[i];
@@ -212,6 +216,7 @@ export default {
 			var div = this.createBox(boundingBox);
 			css.add(div, "MatcAddBox")
 
+
 			var children = this.getTemplateGroupOrderChildren(group);
 			for (var i = 0; i < children.length; i++) {
 				var child = children[i];
@@ -258,7 +263,6 @@ export default {
 		},
 
 		_addScreen(params, screen) {
-
 			if (!this._alignmentToolInited) {
 				var zoomedModel = this.getZoomedBox(lang.clone(screen), this.getZoomFactor(), this.getZoomFactor());
 				this.alignmentStart("screen", zoomedModel, "All");
@@ -268,31 +272,9 @@ export default {
 			var z = this.getZoomFactor();
 			var zoomedScreen = this.getZoomedBox(lang.clone(screen), z, z);
 			var div = this.createScreen(zoomedScreen);
-			css.add(div, "MatcAddBox")
+			css.add(div, "MatcAddBox");
+
 			this.renderFactory.setStyle(div, zoomedScreen);
-
-
-			// Add Custom grid
-			// 50 is the factor size here, i.e. Cell is 50th of total size
-
-			// let scale;
-			// if (cellSize == 0) {
-			// 	scale = 75;
-			// }
-			// else if (cellSize == 1) {
-			// 	scale = 50;
-			// }
-			// else if (cellSize == 2) {
-			// 	scale = 25;
-			// }
-			// var h;
-			// params.obj.h > params.obj.w ? h = params.obj.h : h = params.obj.w;
-			// h = h/scale;  
-			// screen['style']['background-image'] = `repeating-linear-gradient(#CDCDCD 0 1px, transparent 1px 100%),
-			// repeating-linear-gradient(90deg, #CDCDCD 0 1px, transparent 1px 100%)`;
-			// screen['style']['background-size'] = `${h}px ${h}px`;
-
-			// End
 
 			this._onAddNDropStart(div, screen, params.event, "onScreenAdded");
 			this.setState(3);
@@ -300,8 +282,9 @@ export default {
 
 		onScreenAdded(pos, model) {
 			this.controller.addScreen(model, pos);
-			this._onAddDone();
+			this._onAddDone(model);
 			this.setState(0);
+
 		},
 
 		/**********************************************************************
@@ -900,7 +883,6 @@ export default {
 			this._addNDropNode = div;
 			this._addNDropModel = model;
 			this._addNDropNodePos = this.getCanvasMousePosition(e);
-			console.log(this._addNDropNodePos)
 
 			this._addNDropNodePos.w = this.getZoomed(this._addNDropModel.w, this.getZoomFactor());
 			this._addNDropNodePos.h = this.getZoomed(this._addNDropModel.h, this.getZoomFactor());
@@ -1064,7 +1046,24 @@ export default {
 				delete this._addCurrentCommand;
 			}
 			this.setMode("edit", true);
+			console.log(this)
 		},
+
+		// async createKonva(model) {
+		// 	var stage = await new Konva.Stage({
+		// 		container: '.' + model.id + 'grid',
+		// 		width: model.w,
+		// 		height: model.h
+		// 	});
+
+		// 	var layer = new Konva.Layer();
+
+		// 	stage.add(layer);
+
+		// 	layer.draw();
+
+		// 	setKonvaObj({id: model.id, stage: stage, layer: layer});
+		// },
 
 		renderAddCommand() {
 			/**

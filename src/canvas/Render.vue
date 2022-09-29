@@ -17,6 +17,8 @@ import ModelUtil from 'core/ModelUtil'
 // import { allCanvas } from 'src/newCustomData.js'
 // import Konva from "konva";
 
+// import { fabric } from "fabric";
+
 export default {
     name: 'Render',
     mixins:[_Color, RenderFlow, Wiring],
@@ -732,10 +734,13 @@ export default {
 		createBox (box){
 			this.logger.log(6,"createBox", "enter");
 			var div = document.createElement("div");
+
 			// var layer = document.createElement("div");
 			// layer.className = 'customGridLayer';
+			// layer.setAttribute("style", "background-color: #ADD8E6 ; position: absolute; height:100%; width: 100%;  pointer-events: none; z-index: -300");
 			// div.appendChild(layer);
-			// div.children[0].setAttribute("style", "background-color:lightblue; position: absolute; height:100%; width: 100%;  pointer-events: none; z-index: -300");
+			
+
 			this.domUtil.setBox(div, box)
 			css.add(div, "MatcBox");
 			return div;

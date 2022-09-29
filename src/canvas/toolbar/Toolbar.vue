@@ -129,12 +129,12 @@
 
 						<!-- Till here -->
 
-						<a class="MatcToolbarItem" data-dojo-attach-point="addVertical">
-							<span class="mdi mdi-arrow-expand-up"></span>
+						<a class="" data-dojo-attach-point="addVertical">
+							<!-- <span class="mdi mdi-arrow-expand-up"></span> -->
 						</a>
 
-						<a class="MatcToolbarItem" data-dojo-attach-point="addHorizontal">
-							<span class="mdi mdi-arrow-expand-right"></span>
+						<a class="" data-dojo-attach-point="addHorizontal">
+							<!-- <span class="mdi mdi-arrow-expand-right"></span> -->
 						</a>
 
 						<a class="MatcToolbarItem MatcToolbarIconNoSmooth" data-dojo-attach-point="uploadButton">
@@ -240,7 +240,8 @@ import EditModeButton from "canvas/toolbar/components/EditModeButton"
 import CollabUser from "canvas/toolbar/components/CollabUser"
 import HelpButton from 'help/HelpButton'
 
-import { gridWidgets } from 'src/newCustomData.js'
+import { konvaObj, gridWidgets } from 'src/newCustomData.js'
+import Konva from 'konva';
 
 
 export default {
@@ -263,7 +264,8 @@ export default {
 			showLabels:false,
 			isDeveloperMode: false,
 			stage: {},
-      		layer: {}
+      		layer: {},
+			gridToggle: false
         }
     },
 	components: {
@@ -297,7 +299,7 @@ export default {
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
 			// this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
-			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "customGrid")));
+			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "getKonva")));
 
 			this.own(on(this.editTool, touch.press, lang.hitch(this, "onEdit")));
 			this.own(on(this.moveTool, touch.press, lang.hitch(this, "onMove")));
@@ -981,6 +983,21 @@ export default {
 			this.emit("mapItems");
 		},
 
+		getKonva(e) {
+			// this.getScreens(this.model).map(ele => {
+			// 	console.log(document.getElementsByClassName(ele.id + 'grid')[0].style.backgroundColor = "red");
+			// })
+			this.stopEvent(e);
+			if (!this.gridToggle) {
+				this.gridToggle = true;
+				this.addEventListeners();
+			}
+			else {
+				this.gridToggle = false;
+				this.removeEventListeners();
+			}
+		},
+
 		customGrid(e) {
 			this.stopEvent(e);
 
@@ -999,11 +1016,50 @@ export default {
 				}
 			const x = e.pageX - e.currentTarget.getBoundingClientRect().x; 
     		const y = e.pageY - e.currentTarget.getBoundingClientRect().y; 
+			let xper = (x/this.model.screens[e.srcElement._screenID].w) * 100;
+			let yper = (y/this.model.screens[e.srcElement._screenID].h) * 100;
 			console.log(x, y);
+			console.log(xper, yper)
+			this.removeEventListeners();
+			this.createKonvaLine(xper, xper, e.srcElement._screenID, this.model.screens[e.srcElement._screenID]);
+		},
+
+		createKonvaLine(x, y, screenId, model) {
+			if (this.gridToggle) {
+				let screenKonva = konvaObj.filter(ele => ele.id == screenId)[0];
+
+				let line = new Konva.Line({
+        			points: [x, 0, x, model.h],
+					stroke: 'black',
+					strokeWidth: 2,
+					lineCap: 'round',
+					lineJoin: 'round',
+      			});
+
+				screenKonva.layer.add(line);
+			}
+		},
+
+		addEventListeners() {
+			Array.from(document.getElementsByClassName("MatcScreenDnD")).forEach(ele => {
+				ele.addEventListener("click", (e) => {
+					this.getScreenCoordAndName(e, ele);
+				})
+			})
+		},
+
+		removeEventListeners() {
+			Array.from(document.getElementsByClassName("MatcScreenDnD")).forEach(ele => {
+				console.log('removed')
+				ele.removeEventListener("click", (e) => {
+					this.getScreenCoordAndName(e, ele);
+				})
+			})
 		},
 
 		addVerticalLine(e) {
 			this.canvas.addWidgetCustom(e, gridWidgets[1])
+			
 		},
 
 		addHorizontalLine(e) {
