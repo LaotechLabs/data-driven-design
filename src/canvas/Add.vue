@@ -424,6 +424,25 @@ export default {
 			this.logger.log(0, "onWidgetAdded", "enter");
 
 			var newWidget = this.controller.addWidget(model, pos);
+
+			let screens = this.model.screens;
+
+			Object.keys(screens).forEach(ele => {
+				if(screens[ele].children.includes(model.id)) {
+					if (model.type == 'Vertical') {
+						console.log(screens[ele]);
+						model.h = screens[ele].h;
+						model.y = screens[ele].y;
+						console.log(model)
+						this.controller.reRenderWigetCustom();
+					}
+					else if (model.type == 'Horizontal') {
+						model.w = screens[ele].w;
+						model.x = screens[ele].x;
+					}
+				}
+			})
+
 			if (newWidget) {
 				requestAnimationFrame(() => {
 					this.onWidgetSelected(newWidget.id, true);

@@ -804,6 +804,7 @@ export default {
 		},
 
 		setWidgetStyle (id, style, widget){
+			console.log(id, style, widget)
 			this.logger.log(-1,"setWidgetStyle", "enter > ", id);
 			/**
 			 * get the source model and copy the style. Asume

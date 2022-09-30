@@ -661,6 +661,11 @@ export default class Widget extends Snapp {
 	/**********************************************************************
 	* Widget props
 	**********************************************************************/
+
+	reRenderWigetCustom() {
+		this.render();
+	}
+
 	updateWidgetProperties (id, props, type, doNotRender, forceCompleteRender = false){
 		this.logger.log(-1,"updateWidgetProperties", "enter > " + type+ " > doNotRender: "+ doNotRender);
 

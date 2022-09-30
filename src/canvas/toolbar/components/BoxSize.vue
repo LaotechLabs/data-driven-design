@@ -138,6 +138,7 @@ export default {
 
 					if (hasChange) {
 						console.debug('BoxSize.update() > Change')
+						console.log(this.value);
 						this.emit("change", this.value);
 					}
 				}
