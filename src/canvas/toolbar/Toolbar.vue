@@ -299,7 +299,7 @@ export default {
 			this.own(on(this.copyStyleBtn, touch.press, lang.hitch(this, "onToolCopyStyle")));
 			this.own(on(this.commentBtn, touch.press, lang.hitch(this, "onNewComment")));
 			// this.own(on(this.mapBtn, touch.press, lang.hitch(this, "onMapItems")));
-			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "getKonva")));
+			this.own(on(this.mapBtn, touch.press, lang.hitch(this, "toggleGridLines")));
 
 			this.own(on(this.editTool, touch.press, lang.hitch(this, "onEdit")));
 			this.own(on(this.moveTool, touch.press, lang.hitch(this, "onMove")));
@@ -996,6 +996,21 @@ export default {
 				this.gridToggle = false;
 				this.removeEventListeners();
 			}
+		},
+
+		toggleGridLines(e) {
+			this.stopEvent(e);
+			let widgets = this.model.widgets;
+			Object.keys(widgets).forEach(ele => {
+				if (widgets[ele].type == 'Vertical' || widgets[ele].type == 'Horizontal') {
+					if (widgets[ele].style.display == "none") {
+						this.controller.updateWidgetProperties(widgets[ele].id, {display: ''}, 'style');
+					}
+					else {
+						this.controller.updateWidgetProperties(widgets[ele].id, {display: 'none'}, 'style');
+					}
+				}
+			})
 		},
 
 		customGrid(e) {
@@ -2131,3 +2146,9 @@ export default {
     }
 }
 </script>
+
+<style>
+	.HideGrid {
+		display: none;
+	}
+</style>

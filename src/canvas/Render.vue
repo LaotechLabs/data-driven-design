@@ -683,6 +683,9 @@ export default {
 			var div = this.createBox(widget);
 			div._widgetID = widget.id
 			css.add(div, "MatcWidgetDND");
+			if (widget.type == "Vertical" || widget.type == "Horizontal") {
+				css.add(div, 'GridLines');
+			}
 			if (this.hasLogic(widget)) {
 				css.add(div, "MatcLogicWidgetDnD");
 			}
