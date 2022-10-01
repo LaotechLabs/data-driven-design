@@ -4,9 +4,11 @@ import lang from 'dojo/_base/lang'
 import css from 'dojo/css'
 import win from 'dojo/_base/win'
 import ModelUtil from 'core/ModelUtil'
+import { mode } from 'babel-core/lib/transformation/file/options/config'
 
 // import { setKonvaObj } from 'src/newCustomData.js'
 // import Konva from 'konva';
+import { sourceModel } from 'src/newCustomData'
 
 
 export default {
@@ -384,7 +386,6 @@ export default {
 
 		_addWidget(params, widget, mode) {
 			this.logger.log(-1, "_addWidget", "enter", widget);
-
 			if (mode) {
 				this.setMode(mode);
 			} else {
@@ -420,28 +421,44 @@ export default {
 			this.logger.log(2, "_addWidget", "exit");
 		},
 
-		onWidgetAdded(pos, model) {
+		async onWidgetAdded(pos, model) {
 			this.logger.log(0, "onWidgetAdded", "enter");
 
-			var newWidget = this.controller.addWidget(model, pos);
+			// Code to check for gridlines and add it appropriately
 
+			// we get the x,y coordinates for the widget from the scaled screen (this.model)
+			// we get the h,w values for the widget from the source model (unscaled) screen (this.model)
+			// unscaled model we set each time screen is rendered in render.vue
+
+			let sourceScreens = sourceModel.screens;  
 			let screens = this.model.screens;
-
-			Object.keys(screens).forEach(ele => {
-				if(screens[ele].children.includes(model.id)) {
-					if (model.type == 'Vertical') {
-						console.log(screens[ele]);
-						model.h = screens[ele].h;
-						model.y = screens[ele].y;
-						console.log(model)
-						this.controller.reRenderWigetCustom();
+			Object.keys(screens).forEach(screen => {
+				if (pos.x > screens[screen].x && pos.x < screens[screen].x + screens[screen].w) {
+					if (pos.y > screens[screen].y && pos.y < screens[screen].y + screens[screen].h) {
+						// Inside
+						if (model.type == 'Vertical') {
+							model.h = sourceScreens[screen].h;
+							model.y = screens[screen].y;
+							pos.h = screens[screen].h;
+							pos.y = screens[screen].y;
+						}
+						else if (model.type == 'Horizontal') {
+							model.w = sourceScreens[screen].w;
+							model.x = screens[screen].x;
+							pos.w = screens[screen].w;
+							pos.x = screens[screen].x;
+						}
 					}
-					else if (model.type == 'Horizontal') {
-						model.w = screens[ele].w;
-						model.x = screens[ele].x;
+					else {
+						// Outside
 					}
 				}
+				else {
+					// Outside
+				}
 			})
+
+			var newWidget = this.controller.addWidget(model, pos);
 
 			if (newWidget) {
 				requestAnimationFrame(() => {
@@ -452,6 +469,10 @@ export default {
 			this._onAddDone();
 
 			this.setState(0);
+		},
+
+		adjustGridWidget() {
+
 		},
 
 
@@ -1065,7 +1086,25 @@ export default {
 				delete this._addCurrentCommand;
 			}
 			this.setMode("edit", true);
-			console.log(this)
+
+			let screens = this.model.screens;
+			let widgets = this.model.widgets;
+			Object.keys(screens).forEach(ele => {
+				let screen = screens[ele];
+				let children = screen.children;
+				children.forEach(child => {
+					if (widgets[child].type == 'Vertical') {
+						widgets[child].y = screen.y;
+						widgets[child].h = screen.h;
+					}
+					else if (widgets[child].type == 'Horizontal') {
+						widgets[child].x = screen.x;
+						widgets[child].w = screen.w;
+					}
+				})
+			})
+			this.model.widgets = widgets;
+			this.controller.reRenderWigetCustom()
 		},
 
 		// async createKonva(model) {
