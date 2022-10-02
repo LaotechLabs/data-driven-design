@@ -1005,9 +1005,11 @@ export default {
 				if (widgets[ele].type == 'Vertical' || widgets[ele].type == 'Horizontal') {
 					if (widgets[ele].style.display == "none") {
 						this.controller.updateWidgetProperties(widgets[ele].id, {display: ''}, 'style');
+						this.controller.updateWidgetProperties(widgets[ele].id, {onclick: true}, 'has');
 					}
 					else {
 						this.controller.updateWidgetProperties(widgets[ele].id, {display: 'none'}, 'style');
+						this.controller.updateWidgetProperties(widgets[ele].id, {onclick: false}, 'has');
 					}
 				}
 			})

@@ -482,14 +482,19 @@
                 request.responseType = 'blob';
                 request.timeout = TIMEOUT;
                 
-                // If custom url, remove the /rest/images/ part from the url
+                // If image doesn't show on export screen, edit here
 
-                if (url.slice(0, 13) == '/rest/images/') {
+                
+                // If custom url, remove the /rest/images/ part from the url
+                // Make changes here if URL doesn't start with 'http'
+
+                if (url.slice(0, 17) == '/rest/images/http') {
                     url = url.substring(13);
                 }
 
                 // Pass sliced url into request
 
+                console.log(url);
                 request.open('GET', url, true);
                 request.send();
 
