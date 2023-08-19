@@ -1,12 +1,28 @@
-[![Docker Image Build and Push to Dockerhub - CI/CD](https://github.com/KlausSchaefers/quant-ux/actions/workflows/docker.yml/badge.svg)](https://github.com/KlausSchaefers/quant-ux/actions/workflows/docker.yml)
+This is a fork of [Quant UX](https://github.com/KlausSchaefers/quant-ux) originally created by Klaus Schaefer.
 
-# Quant-UX - Prototype, Test and Learn
+## Data-Driven Automations for Content Designing
 
-Quant UX is a research, usability and prototyping tool to quickly test your designs and get data driven insights. 
-This repo contains the front end. You can find a working demo at https://quant-ux.com/#/
+Read about this approach here: 
+
+This repository contains files used to create the implementation for the Data Driven Automations approach. 
+
+### Implementation details
+
+https://github.com/LaotechLabs/data-driven-design/assets/22636983/110fee0f-1a3c-4b0a-8d2e-37e8915c3375
+
+1. Create a CSV data file (make sure the extension is .csv, and not .xlsx or anything else).
+2. First row of the CSV file will contain IDs used to map assets. Subsequent rows will contain the assets themselves. Images should be uploaded and their URLs added to the file.
+3. Create a new prototype and choose a suitable template size.
+4. Add label widgets for text assets, and image widget for image assets. Add the ID you created in the CSV file as the corresponding widgets name.
+5. Click on Upload and upload the CSV file.
+6. Click on Add.
+7. Use the Next and Previous buttons to cycle through the assets.
+
+File used:
+[Formula1_data.csv](https://github.com/LaotechLabs/data-driven-design/files/12385155/Formula1_data.csv)
 
 
-## Develpment setup
+## Development setup
 ```
 npm install
 ```
@@ -20,100 +36,6 @@ npm run serve
 ```
 npm run build
 ```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-
-# Installation
-
-The easiest way to get your own installation up and running is using the prebuild Docker images by [Brian McGonagill](https://github.com/bmcgonag).  You can find the repo and instructions at https://github.com/bmcgonag/quant-ux-docker/
-
-
-## Manual Installation
-
-Quant-UX has two components. A front-end (this package) and a backend (qux-java). The front-end needs Node.js (> 12) installed. The backend needs a Mongo DB, a Mail Server (SMPT) and Java (> 1.8). The front-end comes with it's own mini web server, which also include a proxy that redirects all request to the correct backend.
-
-### Backend
-
-- Install Mongo DB (> 4.4)
-
-- Install Java (1.8)
-
-- Checkout the backend
-
-```
-git clone https://github.com/KlausSchaefers/qux-java.git
-```
-
-- This contains already a compiled version of the backend in the release folder
-
-- Edit the matc.conf file to setup the correct mongo and mails server details. More details can be found here: https://github.com/KlausSchaefers/qux-java
-
-- Start the server, or install as a service in Linux. 
-
-```
-java -jar release/matc.jar -Xmx2g -conf matc.conf -instances 1
-```
-
-
-### Front-end
-
-- Install Node.js (> 12)
-
-- Clone repo
-
-```
-git clone https://github.com/KlausSchaefers/quant-ux.git
-```
-
-- Install all dependecies:
-
-```
-npm install
-```
-
-- Build 
-```
-npm run build
-```
-
-### Config front-end
-- Set the proxy server url as en ENV variable
-
-```
-export QUX_PROXY_URL=https://your.quant-ux.server.com // backend host
-
-export QUX_WS_URL= wss.quant-ux.server.com // web socket server
-
-```
-
-- Start
-```
-node server/start.js
-```
-
-### Reverse Proxy
-
-Now you should have a a running system. It is not secure yet. The best is to put both behind a NGINX reverse proxy, which handles SSL.
-
-- https://www.scaleway.com/en/docs/tutorials/nginx-reverse-proxy/
-
-You can use https://letsencrypt.org/ to create SSL certificates
-
-
-
-
-
-
-
 
 
 
